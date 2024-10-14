@@ -24,14 +24,51 @@ repositories {
 }
 
 dependencies {
+    /* 시큐리티 의존성 임시주석처리 계정파트 담당자 Jwt security 필터 사용여부 확인후 처리바람   */
+    // Security
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //Jackson
+    implementation 'com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations'
+    implementation 'io.hypersistence:hypersistence-utils-hibernate-60:3.3.1'
+
+
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
+
+    // MySQL
     runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // Test 라이브러리
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // Bean Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // bcrypt
+    implementation 'at.favre.lib:bcrypt:0.10.2'
+
+    // jwt
+    compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+
+    // QueryDSL
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 }
 
 tasks.named('test') {
