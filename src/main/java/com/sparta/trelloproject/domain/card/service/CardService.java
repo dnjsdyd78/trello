@@ -49,7 +49,7 @@ public class CardService {
     // 카드 + 댓글 + 매니저 조회
     public CardDetailResponse getCard(Long cardId) {
         Card card = cardRepository.findByIdWithDetails(cardId)
-                .orElseThrow(() -> new InvalidRequestException("card not found"));
+                .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_CARD));
 
         // 카드 정보를 CardDetailResponse로 변환
         return new CardDetailResponse(
