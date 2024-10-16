@@ -39,11 +39,11 @@ public class Workspace {
 
     public Workspace() {}
 
-    // 워크스페이스에 멤버 추가
+    // 멤버 추가 메서드 (User와 Role을 함께 받음)
     public void addMember(User user, WorkspaceMember.Role role) {
-        WorkspaceMember member = new WorkspaceMember(user, role); // 새로운 멤버 생성
-        member.setWorkspace(this);  // 새 멤버의 워크스페이스 설정
-        members.add(member);        // 멤버 리스트에 추가
+        WorkspaceMember workspaceMember = new WorkspaceMember(this, user, role);  // WorkspaceMember 생성
+        members.add(workspaceMember);  // 멤버 목록에 추가
+        workspaceMember.setWorkspace(this);  // workspace 설정
     }
 
     // 워크스페이스에 보드 추가

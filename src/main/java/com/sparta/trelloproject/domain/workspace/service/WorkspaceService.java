@@ -11,6 +11,7 @@ import com.sparta.trelloproject.domain.workspace.exception.WorkspaceNotFoundExce
 import com.sparta.trelloproject.domain.workspace.repository.WorkspaceRepository;
 import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberInviteRequest;
 import com.sparta.trelloproject.domain.workspacemember.dto.response.MemberResponse;
+import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,13 +32,18 @@ public class WorkspaceService {
     // 워크스페이스 생성
     public WorkspaceResponse createWorkspace(WorkspaceCreateRequest request) {
         Workspace workspace = new Workspace(request.getName(), request.getDescription());
+
         // 회원 초대 로직 포함
         if (request.getMembers() != null && !request.getMembers().isEmpty()) {
             for (String email : request.getMembers()) {
-                User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(email));
-                workspace.addMember(user);
+                User user = userRepository.findByEmail(email)
+                        .orElseThrow(() -> new UserNotFoundException(email));
+
+                // 기본 역할을 함께 추가 (request에서 defaultRole 가져오기)
+                workspace.addMember(user, request.getDefaultRole());
             }
         }
+
         workspaceRepository.save(workspace);
         return new WorkspaceResponse(workspace);
     }
@@ -68,10 +74,19 @@ public class WorkspaceService {
     public MemberResponse inviteMember(Long workspaceId, MemberInviteRequest request) {
         Workspace workspace = workspaceRepository.findById(workspaceId)
                 .orElseThrow(() -> new WorkspaceNotFoundException(workspaceId));
+
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UserNotFoundException(request.getEmail()));
-        workspace.addMember(user, request.getRole());
+
+        // WorkspaceMember 객체 생성 (User와 Role을 함께 사용)
+        WorkspaceMember workspaceMember = new WorkspaceMember(workspace, user, request.getRole());
+
+        // 멤버 추가
+        workspace.addMember(workspaceMember);
+
+        // 변경된 Workspace 저장
         workspaceRepository.save(workspace);
-        return new MemberResponse(user);
+
+        return new MemberResponse(workspaceMember);
     }
 }

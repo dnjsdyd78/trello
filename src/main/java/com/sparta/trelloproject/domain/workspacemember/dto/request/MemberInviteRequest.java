@@ -1,19 +1,31 @@
 package com.sparta.trelloproject.domain.workspacemember.dto.request;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember.Role;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
-import lombok.Setter;
+
 
 @Getter
-@Setter
 public class MemberInviteRequest {
 
-    @NotNull(message = "이메일은 필수 입력입니다.")
-    @Email(message = "올바른 이메일 형식을 입력해주세요.")
+    @Email
+    @NotBlank
     private String email;
 
-    @NotNull(message = "역할은 필수 입력입니다.")
-    private Role role;
+    @NotBlank
+    private String role;
+
+    public MemberInviteRequest(String email, String role) {
+        this.email = email;
+        this.role = role;
+    }
+
+    // Getter methods
+    public String getEmail() {
+        return email;
+    }
+
+    public String getRole() {
+        return role;
+    }
 }

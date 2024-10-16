@@ -25,22 +25,29 @@ public class WorkspaceMember {
     private Role role; // 워크스페이스 멤버 역할 (관리자, 일반 멤버, 읽기 전용)
 
     public WorkspaceMember() {
+    }
 
+    // WorkspaceMember 생성자
+    public WorkspaceMember(Workspace workspace, User user, Role role) {
+        this.workspace = workspace;
+        this.user = user;
+        this.role = role;
     }
 
     // 멤버 역할 enum
     public enum Role {
-        ADMIN, MEMBER, READ_ONLY
-    }
-
-    // WorkspaceMember 생성자
-    public WorkspaceMember(User user, Role role) {
-        this.user = user;
-        this.role = role;
+        ADMIN, // 워크스페이스 관리자 (생성 외 모든 기능 가능)
+        BOARD_MEMBER, // 보드 멤버 (워크스페이스 관련 기능 제외)
+        READ_ONLY // 읽기 전용 (생성, 수정, 삭제 불가능, 조회만 가능)
     }
 
     // 워크스페이스 설정
     public void setWorkspace(Workspace workspace) {
         this.workspace = workspace;
+    }
+
+    // 멤버 역할 업데이트 메서드
+    public void updateRole(Role newRole) {
+        this.role = newRole;
     }
 }

@@ -1,10 +1,15 @@
 package com.sparta.trelloproject.domain.workspacemember.controller;
 
+import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberInviteRequest;
+import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberRoleUpdateRequest;
+import com.sparta.trelloproject.domain.workspacemember.dto.response.MemberResponse;
 import com.sparta.trelloproject.domain.workspacemember.service.WorkspaceMemberService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/workspaces/{workspaceId}/members")

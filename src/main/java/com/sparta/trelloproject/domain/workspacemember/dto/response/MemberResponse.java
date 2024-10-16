@@ -1,20 +1,29 @@
 package com.sparta.trelloproject.domain.workspacemember.dto.response;
 
-import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class MemberResponse {
+    private Long memberId;
+    private String email;
+    private String role;
 
-    private Long id;
-    private String userName;
-    private WorkspaceMember.Role role;
+    public MemberResponse(Long memberId, String email, String role) {
+        this.memberId = memberId;
+        this.email = email;
+        this.role = role;
+    }
 
-    public MemberResponse(WorkspaceMember member) {
-        this.id = member.getId();
-        this.userName = member.getUser().getName();  // User 엔티티에서 이름을 가져오는 예시
-        this.role = member.getRole();
+    // Getter methods
+    public Long getMemberId() {
+        return memberId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getRole() {
+        return role;
     }
 }

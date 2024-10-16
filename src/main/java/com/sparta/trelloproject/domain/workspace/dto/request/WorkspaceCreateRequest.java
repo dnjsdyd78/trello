@@ -1,12 +1,22 @@
 package com.sparta.trelloproject.domain.workspace.dto.request;
 
+import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public class WorkspaceCreateRequest {
-    @NotBlank(message = "Workspace 이름은 필수입니다.")
     private String name;
     private String description;
+    private List<String> members; // 이메일 목록으로 초대할 멤버들
+    private WorkspaceMember.Role defaultRole; // 멤버에게 부여할 기본 역할
 
+    public WorkspaceCreateRequest(String name, String description, List<String> members, WorkspaceMember.Role defaultRole) {
+        this.name = name;
+        this.description = description;
+        this.members = members;
+        this.defaultRole = defaultRole;
+    }
 }

@@ -37,4 +37,10 @@ public class User {
         this.password = password;
         this.role = role;
     }
+
+    // 유저 권한 enum
+    public enum Role {
+        USER, // 일반 유저
+        ADMIN // 관리자 (워크스페이스 생성 가능, 다른 유저를 워크스페이스 관리자로 설정)
+    }
 }
