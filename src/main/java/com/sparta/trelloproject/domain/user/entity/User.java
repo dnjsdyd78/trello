@@ -11,18 +11,16 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Email
-    @NotBlank(message = "Email is required")
-    @Column(nullable = false, unique = true)
+
     private String email;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 8, message = "비밀번호는 8자 이상 입력해주세요.")
+
     @Column(nullable = false)
     private String password;
 
