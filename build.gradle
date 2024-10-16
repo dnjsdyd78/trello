@@ -35,8 +35,6 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations'
     implementation 'io.hypersistence:hypersistence-utils-hibernate-60:3.3.1'
 
-
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     // MySQL JDBC 드라이버
