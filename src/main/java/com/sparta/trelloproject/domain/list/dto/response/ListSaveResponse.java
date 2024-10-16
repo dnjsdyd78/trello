@@ -1,6 +1,6 @@
 package com.sparta.trelloproject.domain.list.dto.response;
 
-import com.sparta.trelloproject.domain.list.entity.List;
+import com.sparta.trelloproject.domain.list.entity.ListEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -9,13 +9,13 @@ import lombok.RequiredArgsConstructor;
 public class ListSaveResponse {
     private final Long id;
     private final String title;
-    private final int order;
+    private final Integer order;
 
-    public static ListSaveResponse of(List list) {
+    public static ListSaveResponse of(ListEntity listEntity) {
         return new ListSaveResponse(
-                list.getListId(),
-                list.getTitle(),
-                list.getOrder()
+                listEntity.getListId(),
+                listEntity.getTitle(),
+                listEntity.getSequence()
         );
     }
 }

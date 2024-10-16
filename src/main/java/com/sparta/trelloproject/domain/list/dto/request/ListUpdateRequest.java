@@ -7,5 +7,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ListUpdateRequest {
     private String title;
-    private int order;
+    private Integer order;
 }

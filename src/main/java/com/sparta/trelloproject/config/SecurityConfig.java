@@ -12,13 +12,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class SecurityConfig {
+
     private final JwtUtil jwtUtil;
+
     public SecurityConfig(final JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .csrf(csrf -> csrf.disable()) // 최신 방식으로 CSRF 비활성화 (가연 수정)
+//                .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/register", "/api/users/login").permitAll()
                         .anyRequest().authenticated()

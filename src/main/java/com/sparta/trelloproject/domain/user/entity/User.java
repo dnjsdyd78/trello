@@ -49,8 +49,10 @@ public class User {
                 authUser.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority)
                         .findFirst()
-                        .orElseThrow(() -> new ServerException("권한이 없습니다."))
+//                        .orElseThrow(() -> new ServerException("권한이 없습니다."))
+                        .orElseThrow(() -> new IllegalArgumentException("권한이 없습니다."))
         );
-        return new User(authUser.getId(), authUser.getEmail(), role);
+//        return new User(authUser.getId(), authUser.getEmail(), role);
+        return null;
     }
 }

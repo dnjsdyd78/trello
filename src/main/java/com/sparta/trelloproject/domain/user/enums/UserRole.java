@@ -1,5 +1,7 @@
 package com.sparta.trelloproject.domain.user.enums;
 
+import com.sparta.trelloproject.common.exception.InvalidRequestException;
+
 import java.util.Arrays;
 
 public enum UserRole {

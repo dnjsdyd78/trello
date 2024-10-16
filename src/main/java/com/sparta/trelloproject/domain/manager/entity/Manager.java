@@ -4,6 +4,7 @@ import com.sparta.trelloproject.domain.card.entity.Card;
 import com.sparta.trelloproject.domain.workSpaceMameber.entity.WorkSpaceMember;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,8 +22,17 @@ public class Manager {
     private Card card;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "workspace_id")
+    @JoinColumn(name = "workspace_member_id")
     private WorkSpaceMember workSpaceMember;
 
+    @Column(nullable = false)
+    private String email; // 이메일 필드 추가
 
+    // 매니저 생성자
+    @Builder
+    public Manager(Card card, WorkSpaceMember workSpaceMember) {
+        this.card = card;
+        this.workSpaceMember = workSpaceMember;
+        this.email = workSpaceMember.getUser().getEmail(); // 유저의 이메일을 매니저의 이메일로 설정
+    }
 }

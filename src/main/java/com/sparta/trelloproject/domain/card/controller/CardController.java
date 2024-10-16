@@ -4,6 +4,7 @@ import com.sparta.trelloproject.common.apipayload.ApiResponse;
 import com.sparta.trelloproject.common.dto.AuthUser;
 import com.sparta.trelloproject.domain.card.dto.request.CardSaveRequest;
 import com.sparta.trelloproject.domain.card.dto.request.CardUpdateRequest;
+import com.sparta.trelloproject.domain.card.dto.response.CardDetailResponse;
 import com.sparta.trelloproject.domain.card.dto.response.CardSaveResponse;
 import com.sparta.trelloproject.domain.card.repository.CardRepository;
 import com.sparta.trelloproject.domain.card.service.CardService;
@@ -19,6 +20,7 @@ public class CardController {
 
     private final CardService cardService;
 
+    // 카드 생성
     @PostMapping("/api/lists/{listId}/cards")
     public ApiResponse<CardSaveResponse> saveCard(@AuthenticationPrincipal AuthUser authUser,
                                                   @PathVariable Long listId,
@@ -26,12 +28,14 @@ public class CardController {
         return ApiResponse.onSuccess(cardService.saveCard(authUser, listId, request));
     }
 
+    // 카드 상세 조회
     @GetMapping("/api/cards/{cardId}")
-    public ApiResponse<CardRepository> getCard(@AuthenticationPrincipal AuthUser authUser,
-                                               @PathVariable Long cardId) {
+    public ApiResponse<CardDetailResponse> getCard(@AuthenticationPrincipal AuthUser authUser,
+                                                   @PathVariable Long cardId) {
         return ApiResponse.onSuccess(cardService.getCard(authUser, cardId));
     }
 
+    // 카드 수정
     @PatchMapping("/api/cards/{cardId}")
     public ApiResponse<CardSaveResponse> updateCard(@AuthenticationPrincipal AuthUser authUser,
                                                     @PathVariable Long cardId,
@@ -39,6 +43,7 @@ public class CardController {
         return ApiResponse.onSuccess(cardService.updateCard(authUser, cardId, request));
     }
 
+    // 카드 삭제
     @DeleteMapping("/api/cards/{cardId}")
     public ApiResponse<String> deleteCard(@AuthenticationPrincipal AuthUser authUser,
                                           @PathVariable Long cardId) {
