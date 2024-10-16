@@ -7,24 +7,26 @@ import com.sparta.trelloproject.config.SlackAlertUtil;
 import com.sparta.trelloproject.domain.alert.dto.AlertRequest;
 import com.sparta.trelloproject.domain.alert.dto.AlertResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
 @RequiredArgsConstructor
 @Service
 public class AlertService {
 
     private final SlackAlertUtil alertUtil;
     private final ObjectMapper objectMapper;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     public AlertResponse createAlert(AlertRequest request) {
-        try{
+        try {
             // 알림요청 제이슨 형태 문자열 변환
             String text = objectMapper.writeValueAsString(request);
-
-            // 알림 예약 api 요청
-            alertUtil.ChatScheduleMessage(text, request.getAlertTime());
+            // 레디스 데이터 전송
+            redisTemplate.convertAndSend("reservationChannel", text);
 
             return new AlertResponse(request.getTitle(), request.getContents(), request.getAssignee(), request.getAlertTime());
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ApiException(ErrorStatus._SERIALIZATION_ERROR);
         }
     }
