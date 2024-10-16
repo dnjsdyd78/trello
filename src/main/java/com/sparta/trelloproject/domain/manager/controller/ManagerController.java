@@ -19,11 +19,11 @@ public class ManagerController {
 //    public ApiResponse<ManagerResponse> saveManager(
 //            @AuthenticationPrincipal AuthUser authUser,
 //            @RequestBody ManagerSaveRequest request) {
-
+//
 //        ManagerResponse response = managerService.saveManager(authUser, request);
 //        return ApiResponse.onSuccess(response);
 //    }
-
+//
 //    // 매니저 수정
 //    @PatchMapping("/managers/{managerId}")
 //    public ApiResponse<ManagerResponse> updateManager(
