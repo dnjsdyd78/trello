@@ -5,5 +5,5 @@ import lombok.Getter;
 @Getter
 public class ListSaveRequest {
     private String title;
-    private int order;
+    private int sequence;
 }
