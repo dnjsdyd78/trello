@@ -30,9 +30,9 @@ public class Manager {
 
     // 매니저 생성자
     @Builder
-    public Manager(Card card, WorkSpaceMember workSpaceMember) {
+    public Manager(Card card, WorkSpaceMember workSpaceMember, String email) {
         this.card = card;
         this.workSpaceMember = workSpaceMember;
-        this.email = workSpaceMember.getUser().getEmail(); // 유저의 이메일을 매니저의 이메일로 설정
+        this.email = email;
     }
 }

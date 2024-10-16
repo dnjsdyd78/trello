@@ -7,12 +7,16 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ManagerResponse {
-    private Long managerId; // 매니저 ID
+    private Long managerId;
+    private Long cardId; // 카드 ID
+    private Long workspaceMemberId; // 워크스페이스 멤버 ID
     private String email; // 이메일
 
-    // Manager 객체로부터 ManagerResponse 생성
+    // 매니저 정보를 바탕으로 Response 객체 생성
     public ManagerResponse(Manager manager) {
         this.managerId = manager.getManagerId();
-        this.email = manager.getEmail(); // 이메일 정보 설정
+        this.cardId = manager.getCard().getCardId(); // 카드 ID 가져오기
+        this.workspaceMemberId = manager.getWorkSpaceMember().getWorkSpaceMemberId(); // 워크스페이스 멤버 ID 가져오기
+        this.email = manager.getEmail(); // 이메일
     }
 }
