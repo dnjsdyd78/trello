@@ -12,17 +12,19 @@ public enum ErrorStatus implements StatusBase {
 
     // 예시
     _NOT_FOUND_CARD(HttpStatus.NOT_FOUND, "404", "존재하지 않는 카드입니다."),
-    _FORBIDDEN(HttpStatus.FORBIDDEN, "403", "접근 권한이 없습니다.");
+    _FORBIDDEN(HttpStatus.FORBIDDEN, "403", "접근 권한이 없습니다."),
 
     // 지민
 
     // 원용
 
     // 가연
+    _NOT_FOUND_List(HttpStatus.NOT_FOUND, "404", "존재하지 않는 리스트입니다."),
 
     // 예지
 
     // 예환
+    _NOT_FOUND_BOARD(HttpStatus.NOT_FOUND, "404", "존재하지 않는 보드입니다");
 
     private final HttpStatus httpStatus;
     private final String statusCode;
