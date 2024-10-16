@@ -3,6 +3,7 @@ package com.sparta.trelloproject.domain.card.service;
 import com.sparta.trelloproject.common.apipayload.status.ErrorStatus;
 import com.sparta.trelloproject.common.dto.AuthUser;
 import com.sparta.trelloproject.common.exception.ApiException;
+import com.sparta.trelloproject.common.exception.InvalidRequestException;
 import com.sparta.trelloproject.domain.card.dto.request.CardSaveRequest;
 import com.sparta.trelloproject.domain.card.dto.request.CardUpdateRequest;
 import com.sparta.trelloproject.domain.card.dto.response.CardDetailResponse;
@@ -49,7 +50,8 @@ public class CardService {
     public CardDetailResponse getCard(AuthUser authUser, Long cardId) {
         User user = User.fromAuthUser(authUser);
 
-        Card card = findCardById(cardId);
+        Card card = cardRepository.findByIdWithDetails(cardId)
+                .orElseThrow(() -> new InvalidRequestException("card not found"));
 
         // 카드 정보를 CardDetailResponse로 변환
         return new CardDetailResponse(
