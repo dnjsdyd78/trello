@@ -1,5 +1,6 @@
 package com.sparta.trelloproject.domain.workspacemember.dto.response;
 
+import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import lombok.Getter;
 
 @Getter
@@ -12,6 +13,9 @@ public class MemberResponse {
         this.memberId = memberId;
         this.email = email;
         this.role = role;
+    }
+
+    public MemberResponse(WorkspaceMember workspaceMember) {
     }
 
     // Getter methods

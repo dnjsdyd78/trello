@@ -54,4 +54,7 @@ public class Workspace {
 
     public void update(String name, String description) {
     }
+
+    public void addMember(WorkspaceMember workspaceMember) {
+    }
 }
