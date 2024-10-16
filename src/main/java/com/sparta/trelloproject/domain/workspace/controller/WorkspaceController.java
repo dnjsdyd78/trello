@@ -4,8 +4,6 @@ import com.sparta.trelloproject.domain.workspace.dto.request.WorkspaceCreateRequ
 import com.sparta.trelloproject.domain.workspace.dto.request.WorkspaceUpdateRequest;
 import com.sparta.trelloproject.domain.workspace.dto.response.WorkspaceResponse;
 import com.sparta.trelloproject.domain.workspace.service.WorkspaceService;
-import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberInviteRequest;
-import com.sparta.trelloproject.domain.workspacemember.dto.response.MemberResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/workspaces")
+@RequestMapping("/api/workspaces")
 public class WorkspaceController {
 
     private final WorkspaceService workspaceService;

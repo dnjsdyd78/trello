@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/workspaces/{workspaceId}/boards")
+@RequestMapping("/api/workspaces/{workspaceId}/boards")
 public class BoardController {
 
     private final BoardService boardService;
