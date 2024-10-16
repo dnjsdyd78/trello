@@ -30,9 +30,8 @@ public class CardController {
 
     // 카드 상세 조회
     @GetMapping("/api/cards/{cardId}")
-    public ApiResponse<CardDetailResponse> getCard(@AuthenticationPrincipal AuthUser authUser,
-                                                   @PathVariable Long cardId) {
-        return ApiResponse.onSuccess(cardService.getCard(authUser, cardId));
+    public ApiResponse<CardDetailResponse> getCard(@PathVariable Long cardId) {
+        return ApiResponse.onSuccess(cardService.getCard(cardId));
     }
 
     // 카드 수정

@@ -47,9 +47,7 @@ public class CardService {
     }
 
     // 카드 + 댓글 + 매니저 조회
-    public CardDetailResponse getCard(AuthUser authUser, Long cardId) {
-        User user = User.fromAuthUser(authUser);
-
+    public CardDetailResponse getCard(Long cardId) {
         Card card = cardRepository.findByIdWithDetails(cardId)
                 .orElseThrow(() -> new InvalidRequestException("card not found"));
 
