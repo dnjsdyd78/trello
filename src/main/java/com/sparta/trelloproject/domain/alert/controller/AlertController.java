@@ -1,15 +1,16 @@
 package com.sparta.trelloproject.domain.alert.controller;
 
+import com.sparta.trelloproject.common.annotation.SendAlert;
 import com.sparta.trelloproject.common.apipayload.ApiResponse;
 import com.sparta.trelloproject.domain.alert.dto.AlertRequest;
 import com.sparta.trelloproject.domain.alert.dto.AlertResponse;
 import com.sparta.trelloproject.domain.alert.service.AlertService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/api")
+
+@RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class AlertController{
 
