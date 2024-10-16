@@ -1,7 +1,6 @@
 package com.sparta.trelloproject.domain.workspace.dto.request;
 
 import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
 import java.util.List;

@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
-    Optional<Board> findByTitle(String title); // 보드 제목으로 검색
     List<Board> findAllByWorkspace(Workspace workspace);
-
     Optional<Board> findByIdAndWorkspace(Long boardId, Workspace workspace);
 }

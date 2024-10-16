@@ -46,15 +46,10 @@ public class Workspace {
         workspaceMember.setWorkspace(this);  // workspace 설정
     }
 
-    // 워크스페이스에 보드 추가
-    public void addBoard(Board board) {
-        boards.add(board);
-        board.setWorkspace(this);
-    }
-
     public void update(String name, String description) {
     }
 
     public void addMember(WorkspaceMember workspaceMember) {
+
     }
 }

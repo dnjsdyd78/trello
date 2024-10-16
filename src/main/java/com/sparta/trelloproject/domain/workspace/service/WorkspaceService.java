@@ -13,7 +13,6 @@ import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberInviteR
 import com.sparta.trelloproject.domain.workspacemember.dto.response.MemberResponse;
 import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
