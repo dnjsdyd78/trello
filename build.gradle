@@ -26,7 +26,7 @@ repositories {
 dependencies {
     /* 시큐리티 의존성 임시주석처리 계정파트 담당자 Jwt security 필터 사용여부 확인후 처리바람   */
     // Security
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     //JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -39,8 +39,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // MySQL
-    runtimeOnly 'com.mysql:mysql-connector-j'
+    // MySQL JDBC 드라이버
+    runtimeOnly 'mysql:mysql-connector-java:8.0.33'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'
