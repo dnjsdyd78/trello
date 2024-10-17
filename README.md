@@ -1,6 +1,11 @@
 # 나야5조
 #####  프로젝트 관리를 위한 협업 툴 프로젝트
 
+# 팀원
+| ![박지민](https://github.com/user-attachments/assets/e3ad1801-6d1c-4bd6-b693-496a4c896b18) | ![정예지](https://github.com/user-attachments/assets/c98f35fb-8493-4005-83d4-d9c415ad0ed7) | ![안예환](https://github.com/user-attachments/assets/3f5ea34f-d322-4379-be28-2e46b2582253) | ![이가연](https://github.com/user-attachments/assets/2611ed61-d88f-4676-a281-8df8796d0a75) | ![최원용](https://github.com/user-attachments/assets/5adeff91-816a-4207-9ed7-1f817b9cf041) |
+| :---: | :---: | :---: | :---: | :---: |
+| 박지민 | 정예지 | 안예환 | 이가연 | 최원용 |
+
 ## 프로젝트 기능
 
 ### Board (보드 기능)
