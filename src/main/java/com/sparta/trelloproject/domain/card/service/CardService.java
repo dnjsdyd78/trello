@@ -53,7 +53,7 @@ public class CardService {
 
         // 카드 정보를 CardDetailResponse로 변환
         return new CardDetailResponse(
-                card.getCardId(),
+                card.getId(),
                 card.getTitle(),
                 card.getContent(),
                 card.getDeadLine(),

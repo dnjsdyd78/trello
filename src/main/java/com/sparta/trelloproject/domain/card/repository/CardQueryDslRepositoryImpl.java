@@ -25,7 +25,7 @@ public class CardQueryDslRepositoryImpl implements CardQueryDslRepository {
                         .from(card)
                         .leftJoin(card.listEntity, listEntity) // 카드와 리스트 조인
                         .leftJoin(card.managers, manager) // 카드와 매니저 조인
-                        .where(card.cardId.eq(cardId))
+                        .where(card.id.eq(cardId))
                         .fetchOne()
         );
     }

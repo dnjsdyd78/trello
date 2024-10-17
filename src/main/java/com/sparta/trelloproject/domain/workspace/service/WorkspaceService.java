@@ -1,7 +1,6 @@
 package com.sparta.trelloproject.domain.workspace.service;
 
 import com.sparta.trelloproject.domain.user.entity.User;
-import com.sparta.trelloproject.domain.user.enums.UserRole;
 import com.sparta.trelloproject.domain.user.repository.UserRepository;
 import com.sparta.trelloproject.domain.workspace.dto.request.WorkspaceCreateRequest;
 import com.sparta.trelloproject.domain.workspace.dto.request.WorkspaceUpdateRequest;
@@ -10,14 +9,11 @@ import com.sparta.trelloproject.domain.workspace.entity.Workspace;
 import com.sparta.trelloproject.domain.workspace.exception.UserNotFoundException;
 import com.sparta.trelloproject.domain.workspace.exception.WorkspaceNotFoundException;
 import com.sparta.trelloproject.domain.workspace.repository.WorkspaceRepository;
-import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberInviteRequest;
-import com.sparta.trelloproject.domain.workspacemember.dto.response.MemberResponse;
 import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import com.sparta.trelloproject.domain.workspacemember.repository.WorkspaceMemberRepository;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,6 +58,7 @@ public class WorkspaceService {
             for (String email : request.getMembers()) {
                 User user = userRepository.findByEmail(email)
                         .orElseThrow(() -> new UserNotFoundException(email));
+
                 // 기본 역할을 함께 추가 (request에서 defaultRole 가져오기)
                 workspace.addMember(user, request.getDefaultRole());
             }

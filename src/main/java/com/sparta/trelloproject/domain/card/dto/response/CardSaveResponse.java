@@ -16,7 +16,7 @@ public class CardSaveResponse {
 
     public static CardSaveResponse of(Card card) {
         return new CardSaveResponse(
-                card.getCardId(),
+                card.getId(),
                 card.getTitle(),
                 card.getContent(),
                 card.getDeadLine()
