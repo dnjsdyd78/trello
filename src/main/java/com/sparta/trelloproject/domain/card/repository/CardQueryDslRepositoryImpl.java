@@ -26,6 +26,7 @@ import static com.sparta.trelloproject.domain.list.entity.QListEntity.listEntity
 import static com.sparta.trelloproject.domain.manager.entity.QManager.manager;
 import static com.sparta.trelloproject.domain.workspacemember.entity.QWorkspaceMember.workspaceMember;
 
+
 @Repository
 @RequiredArgsConstructor
 public class CardQueryDslRepositoryImpl implements CardQueryDslRepository {

@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
     List<Board> findAllByWorkspace(Workspace workspace);
-    Optional<Board> findByIdAndWorkspace(Long boardId, Workspace workspace);
+    Optional<Board> findByIdAndWorkspace(Long id, Workspace workspace);
 }

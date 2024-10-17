@@ -15,5 +15,5 @@ public class CardUpdateRequest {
     private String content;
     private LocalDateTime deadLine;
 
-
+    private Long userId;
 }

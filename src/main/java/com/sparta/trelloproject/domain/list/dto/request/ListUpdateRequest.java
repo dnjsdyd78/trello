@@ -7,5 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ListUpdateRequest {
     private String title;
-    private Integer order;
+    private Integer sequence;
+
+    private Long userId;
 }

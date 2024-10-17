@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Entity
+@Table
 public class Board {
 
     @Id
@@ -19,7 +20,7 @@ public class Board {
 
     // Board : Workspace = N:1 관계
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "workspace_id")
+    @JoinColumn(name = "workspace_id", nullable = false)
     private Workspace workspace;
 
     // Board 생성자

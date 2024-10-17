@@ -24,6 +24,7 @@ public class WorkspaceController {
     // 워크스페이스 생성
     @PostMapping
     public ResponseEntity<WorkspaceResponse> createWorkspace(@RequestBody @Valid WorkspaceCreateRequest request) {
+        // ADMIN 권한이 있을 경우 워크스페이스 생성
         WorkspaceResponse response = workspaceService.createWorkspace(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

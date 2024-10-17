@@ -1,17 +1,19 @@
 package com.sparta.trelloproject.domain.workspace.entity;
 
+import com.sparta.trelloproject.domain.board.entity.Board;
 import com.sparta.trelloproject.domain.user.entity.User;
+import com.sparta.trelloproject.domain.user.enums.UserRole;
 import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.sparta.trelloproject.domain.board.entity.Board;
-import lombok.Getter;
 
 // 워크스페이스 엔티티
 @Getter
 @Entity
+@Table
 public class Workspace {
 
     @Id
@@ -37,16 +39,20 @@ public class Workspace {
         this.description = description;
     }
 
-    public Workspace() {}
+    public Workspace() {
+
+    }
 
     // 멤버 추가 메서드 (User와 Role을 함께 받음)
-    public void addMember(User user, WorkspaceMember.Role role) {
+    public void addMember(User user, UserRole role) {
         WorkspaceMember workspaceMember = new WorkspaceMember(this, user, role);  // WorkspaceMember 생성
         members.add(workspaceMember);  // 멤버 목록에 추가
         workspaceMember.setWorkspace(this);  // workspace 설정
     }
 
     public void update(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public void addMember(WorkspaceMember workspaceMember) {
