@@ -1,5 +1,6 @@
 package com.sparta.trelloproject.domain.user.entity;
 
+import com.sparta.trelloproject.common.dto.AuthUser;
 import com.sparta.trelloproject.domain.user.enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -8,8 +9,11 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.rmi.ServerException;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Getter
@@ -51,5 +55,10 @@ public class User {
         );
 //        return new User(authUser.getId(), authUser.getEmail(), role);
         return null;
+    }
+
+    // 사용자의 권한을 GrantedAuthority로 변환하여 반환
+    public List<SimpleGrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
 }
