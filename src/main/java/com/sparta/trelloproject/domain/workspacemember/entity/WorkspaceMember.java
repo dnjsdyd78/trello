@@ -36,8 +36,7 @@ public class WorkspaceMember {
     // 멤버 역할 enum
     public enum ZRole {
         ADMIN, // 워크스페이스 관리자 (생성 외 모든 기능 가능)
-        BOARD_MEMBER, // 보드 멤버 (워크스페이스 관련 기능 제외)
-        READ_ONLY // 읽기 전용 (생성, 수정, 삭제 불가능, 조회만 가능)
+        READ_ONLY; // 읽기 전용 (생성, 수정, 삭제 불가능, 조회만 가능);
     }
 
     // WorkspaceMember 생성자
