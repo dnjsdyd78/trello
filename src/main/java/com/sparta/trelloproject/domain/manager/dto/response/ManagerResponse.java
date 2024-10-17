@@ -15,8 +15,8 @@ public class ManagerResponse {
     // 매니저 정보를 바탕으로 Response 객체 생성
     public ManagerResponse(Manager manager) {
         this.managerId = manager.getManagerId();
-        this.cardId = manager.getCard().getCardId(); // 카드 ID 가져오기
-        this.workspaceMemberId = manager.getWorkspaceMember().getWorkspaceMemberId(); // 워크스페이스 멤버 ID 가져오기
+        this.cardId = manager.getCard().getId(); // 카드 ID 가져오기
+        this.workspaceMemberId = manager.getWorkspaceMember().getId(); // 워크스페이스 멤버 ID 가져오기
         this.email = manager.getEmail(); // 이메일
     }
 }

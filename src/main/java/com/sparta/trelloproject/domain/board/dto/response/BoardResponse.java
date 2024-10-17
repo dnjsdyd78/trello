@@ -11,7 +11,7 @@ public class BoardResponse {
 
     // 생성자
     public BoardResponse(Board board) {
-        this.id = board.getBoardId();
+        this.id = board.getId();
         this.title = board.getTitle();
         this.backgroundColor = board.getBackgroundColor();
     }

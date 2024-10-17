@@ -1,7 +1,7 @@
 package com.sparta.trelloproject.domain.manager.entity;
 
 import com.sparta.trelloproject.domain.card.entity.Card;
-import com.sparta.trelloproject.domain.workSpaceMameber.entity.WorkspaceMember;
+import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

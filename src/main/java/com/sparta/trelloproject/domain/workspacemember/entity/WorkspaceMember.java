@@ -3,13 +3,10 @@ package com.sparta.trelloproject.domain.workspacemember.entity;
 import com.sparta.trelloproject.domain.user.entity.User;
 import com.sparta.trelloproject.domain.workspace.entity.Workspace;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table
 public class WorkspaceMember {
 
@@ -33,6 +30,10 @@ public class WorkspaceMember {
         this.workspace = workspace;
         this.user = user;
         this.role = role;
+    }
+
+    public WorkspaceMember() {
+
     }
 
     // 멤버 역할 enum
