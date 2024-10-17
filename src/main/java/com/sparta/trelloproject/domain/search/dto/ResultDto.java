@@ -2,7 +2,6 @@ package com.sparta.trelloproject.domain.search.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
