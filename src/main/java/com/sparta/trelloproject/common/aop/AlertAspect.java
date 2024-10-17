@@ -22,7 +22,7 @@ public class AlertAspect {
         try {
             return joinPoint.proceed();
         } finally {
-            redisTemplate.convertAndSend("liveChannel", message);
+            redisTemplate.convertAndSend("liveChannel", "text");
         }
     }
 }
