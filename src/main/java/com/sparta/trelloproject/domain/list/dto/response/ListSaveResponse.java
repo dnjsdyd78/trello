@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 public class ListSaveResponse {
     private final Long id;
     private final String title;
-    private final Integer order;
+    private final Integer sequence;
 
     public static ListSaveResponse of(ListEntity listEntity) {
         return new ListSaveResponse(

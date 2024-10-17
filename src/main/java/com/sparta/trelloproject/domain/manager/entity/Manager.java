@@ -23,16 +23,16 @@ public class Manager {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workspace_member_id")
-    private WorkspaceMember workSpaceMember;
+    private WorkspaceMember workspaceMember;
 
     @Column(nullable = false)
     private String email; // 이메일 필드 추가
 
     // 매니저 생성자
     @Builder
-    public Manager(Card card, WorkspaceMember workSpaceMember) {
+    public Manager(Card card, WorkspaceMember workSpaceMember, String email) {
         this.card = card;
-        this.workSpaceMember = workSpaceMember;
-        this.email = workSpaceMember.getUser().getEmail(); // 유저의 이메일을 매니저의 이메일로 설정
+        this.workspaceMember = workSpaceMember;
+        this.email = email;
     }
 }

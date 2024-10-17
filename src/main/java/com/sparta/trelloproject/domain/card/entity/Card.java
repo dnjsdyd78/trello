@@ -5,16 +5,13 @@ import com.sparta.trelloproject.domain.card.dto.request.CardSaveRequest;
 import com.sparta.trelloproject.domain.comment.entity.Comment;
 import com.sparta.trelloproject.domain.list.entity.ListEntity;
 import com.sparta.trelloproject.domain.manager.entity.Manager;
+import com.sparta.trelloproject.domain.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -62,5 +59,17 @@ public class Card extends Timestamped {
                 .deadLine(cardSaveRequest.getDeadLine())
                 .listEntity(listEntity)
                 .build();
+    }
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
+    public void updateDeadLine(LocalDateTime deadLine) {
+        this.deadLine = deadLine;
     }
 }

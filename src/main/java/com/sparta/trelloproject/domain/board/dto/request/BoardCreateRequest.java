@@ -9,6 +9,6 @@ public class BoardCreateRequest {
     private String title;
 
     private String backgroundColor;
-    private Long workspaceId; // 어떤 워크스페이스에 속하는지 식별하기 위해
+//    private Long workspaceId; // 어떤 워크스페이스에 속하는지 식별하기 위해
 
 }
