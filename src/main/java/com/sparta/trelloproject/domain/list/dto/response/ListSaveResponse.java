@@ -13,7 +13,7 @@ public class ListSaveResponse {
 
     public static ListSaveResponse of(ListEntity listEntity) {
         return new ListSaveResponse(
-                listEntity.getListId(),
+                listEntity.getId(),
                 listEntity.getTitle(),
                 listEntity.getSequence()
         );

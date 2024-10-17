@@ -25,7 +25,7 @@ public enum ErrorStatus implements StatusBase {
     _NOT_FOUND_ListEntity(HttpStatus.NOT_FOUND, "404", "존재하지 않는 리스트입니다."),
     _NOT_FOUND_WORKSPACE_MEMBER(HttpStatus.NOT_FOUND, "404", "존재하지 않는 멤버입니다."),
     _NOT_FOUND_MANAGER(HttpStatus.NOT_FOUND, "404", "존재하지 않는 매니저입니다."),
-
+    _DUPLICATE_LIST_SEQUENCE(HttpStatus.BAD_REQUEST, "400", "리스트 시퀀스가 중복되었습니다."),
     // 예지
     _NOT_COMMENT_AUTHOR(HttpStatus.FORBIDDEN, "403", "댓글 작성자만 댓글을 수정/삭제할 수 있습니다."),
     _READ_ONLY_USER(HttpStatus.FORBIDDEN, "403", "읽기 전용 역할을 가진 사용자는 댓글을 생성할 수 없습니다."),
