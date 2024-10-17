@@ -38,7 +38,8 @@ public class Board {
         this.workspace = workspace;
     }
 
-    public void update(String title, Object description) {
-
+    public void update(String title, String backgroundColor) {
+        this.title = title;
+        this.backgroundColor = backgroundColor;
     }
 }
