@@ -1,5 +1,6 @@
 package com.sparta.trelloproject.domain.workspace.controller;
 
+import com.sparta.trelloproject.common.dto.AuthUser;
 import com.sparta.trelloproject.domain.workspace.dto.request.WorkspaceCreateRequest;
 import com.sparta.trelloproject.domain.workspace.dto.request.WorkspaceUpdateRequest;
 import com.sparta.trelloproject.domain.workspace.dto.response.WorkspaceResponse;
@@ -7,6 +8,10 @@ import com.sparta.trelloproject.domain.workspace.service.WorkspaceService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +29,7 @@ public class WorkspaceController {
     // 워크스페이스 생성
     @PostMapping
     public ResponseEntity<WorkspaceResponse> createWorkspace(@RequestBody @Valid WorkspaceCreateRequest request) {
+        // ADMIN 권한이 있을 경우 워크스페이스 생성
         WorkspaceResponse response = workspaceService.createWorkspace(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
