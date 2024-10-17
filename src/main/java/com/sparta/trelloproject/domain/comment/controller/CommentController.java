@@ -1,5 +1,6 @@
 package com.sparta.trelloproject.domain.comment.controller;
 
+import com.sparta.trelloproject.common.apipayload.ApiResponse;
 import com.sparta.trelloproject.domain.comment.dto.request.CommentSaveRequestDto;
 import com.sparta.trelloproject.domain.comment.dto.request.CommentUpdateRequestDto;
 import com.sparta.trelloproject.domain.comment.dto.response.CommentSaveResponseDto;
@@ -15,19 +16,20 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/comments")
-    public ResponseEntity<CommentSaveResponseDto> saveComment(@PathVariable Long commentId, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
-        return ResponseEntity.ok(commentService.saveComment(commentId, commentSaveRequestDto));
+    @PostMapping("/cards/{cardId}/comments")
+    public ApiResponse<CommentSaveResponseDto> saveComment(@PathVariable Long cardId, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
+        return ApiResponse.onSuccess(commentService.saveComment(cardId, commentSaveRequestDto));
     }
 
-    @PutMapping("/comments/{commentId}")
-    public ResponseEntity<CommentUpdateResponseDto> updateComment(@PathVariable Long commentId, @RequestBody CommentUpdateRequestDto commentUpdateRequestDto){
-        return ResponseEntity.ok(commentService.updateComment(commentId, commentUpdateRequestDto));
+    @PutMapping("/cards/{cardId}/comments/{commentId}")
+    public ApiResponse<CommentUpdateResponseDto> updateComment(@PathVariable Long cardId, @PathVariable Long commentId, @RequestBody CommentUpdateRequestDto commentUpdateRequestDto){
+        return ApiResponse.onSuccess(commentService.updateComment(cardId, commentId, commentUpdateRequestDto));
     }
 
-    @DeleteMapping("/comments/{commentId}")
-    public void deleteComment(@PathVariable Long commentId){
-        commentService.deleteComment(commentId);
+    @DeleteMapping("/cards/{cardId}/comments/{commentId}")
+    public ApiResponse<Void> deleteComment(@PathVariable Long cardId, @PathVariable Long commentId){
+        commentService.deleteComment(cardId, commentId);
+        return ApiResponse.onSuccess(null);
     }
 
 }

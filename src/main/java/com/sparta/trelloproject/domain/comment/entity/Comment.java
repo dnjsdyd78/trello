@@ -1,5 +1,6 @@
 package com.sparta.trelloproject.domain.comment.entity;
 
+import com.sparta.trelloproject.common.entity.Timestamped;
 import com.sparta.trelloproject.domain.card.entity.Card;
 import com.sparta.trelloproject.domain.user.entity.User;
 import jakarta.persistence.*;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor
-public class Comment {
+public class Comment extends Timestamped {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
@@ -36,4 +37,11 @@ public class Comment {
         this.contents = contents;
     }
 
+    public Long getCommentId() {
+        return id;
+    }
+
+    public String getComment() {
+        return contents;
+    }
 }

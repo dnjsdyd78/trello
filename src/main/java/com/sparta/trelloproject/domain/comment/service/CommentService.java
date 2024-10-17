@@ -21,7 +21,7 @@ public class CommentService {
     private final CardRepository cardRepository;
     private final UserRepository userRepository;
 
-    public CommentSaveResponseDto saveComment(Long commentId, CommentSaveRequestDto commentSaveRequestDto) {
+    public CommentSaveResponseDto saveComment(Long cardId, CommentSaveRequestDto commentSaveRequestDto) {
         Card card = cardRepository.findById(cardId).orElseThrow(() ->
                 new NullPointerException("카드를 찾을수 없습니다."));
 
@@ -37,18 +37,18 @@ public class CommentService {
                 new UserDto(user.getId(), user.getEmail()));
     }
 
-    public CommentUpdateResponseDto updateComment(Long commentId, CommentUpdateRequestDto commentUpdateRequestDto) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(() ->
-                new NullPointerException("댓글을 찾을수 없습니다."));
+    public CommentUpdateResponseDto updateComment(Long cardId, Long commentId, CommentUpdateRequestDto commentUpdateRequestDto) {
+        Comment comment = commentRepository.findByCardIdAndId(cardId, commentId)
+                .orElseThrow(() -> new RuntimeException("해당 카드에 댓글이 존재하지 않습니다."));
 
         comment.update(commentUpdateRequestDto.getContents());
         return new CommentUpdateResponseDto(comment.getId(), comment.getContents());
     }
 
-    public void deleteComment(Long commentId) {
-        if(!commentRepository.existsById(commentId)) {
-            throw new NullPointerException("댓글을 찾을수 없습니다.");
-        }
-        commentRepository.deleteById(commentId);
+    public void deleteComment(Long cardId, Long commentId) {
+        Comment comment = commentRepository.findByCardIdAndId(cardId, commentId)
+                .orElseThrow(() -> new RuntimeException("해당 카드에 댓글이 존재하지 않습니다."));
+
+        commentRepository.deleteById(comment.getId());
     }
 }
