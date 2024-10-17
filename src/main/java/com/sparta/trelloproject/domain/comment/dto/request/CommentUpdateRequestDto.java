@@ -6,4 +6,5 @@ import lombok.Getter;
 public class CommentUpdateRequestDto {
 
     private String contents;
+    private Long userId;
 }
