@@ -31,7 +31,7 @@ public class ManagerService {
         User user = User.fromAuthUser(authUser);
 
         Card card = findCardById(cardId);
-        WorkspaceMember workspaceMember = findWorkspaceMemberById(request.getWorkSpaceMemberId()); // workSpaceMemberId 추가);
+        WorkspaceMember workspaceMember = findWorkspaceMemberById(request.getWorkSpaceMemberId()); // workSpaceMemberId 추가
 
         Manager manager = Manager.builder()
                 .card(card)
