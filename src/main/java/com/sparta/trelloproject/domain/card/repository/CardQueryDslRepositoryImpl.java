@@ -1,29 +1,26 @@
 package com.sparta.trelloproject.domain.card.repository;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sparta.trelloproject.domain.card.entity.Card;
 import com.sparta.trelloproject.domain.search.dto.QSearchResponse;
 import com.sparta.trelloproject.domain.search.dto.ResultDto;
 import com.sparta.trelloproject.domain.search.dto.SearchResponse;
-import com.sparta.trelloproject.domain.workspacemember.controller.WorkspaceMemberController;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import com.querydsl.core.types.Predicate;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static com.sparta.trelloproject.domain.board.entity.QBoard.board;
-import static com.sparta.trelloproject.domain.user.entity.QUser.user;
 import static com.sparta.trelloproject.domain.card.entity.QCard.card;
 import static com.sparta.trelloproject.domain.list.entity.QListEntity.listEntity;
 import static com.sparta.trelloproject.domain.manager.entity.QManager.manager;
+import static com.sparta.trelloproject.domain.user.entity.QUser.user;
 import static com.sparta.trelloproject.domain.workspacemember.entity.QWorkspaceMember.workspaceMember;
 
 
@@ -62,7 +59,7 @@ public class CardQueryDslRepositoryImpl implements CardQueryDslRepository {
                 .leftJoin(card.listEntity, listEntity)
                 .leftJoin(listEntity.board, board)
                 .leftJoin(card.managers, manager)
-                .leftJoin(manager.workSpaceMember)
+                .leftJoin(manager.workspaceMember)
                 .leftJoin(workspaceMember.user, user)
                 .where(orIfPresentForDateRange(fromDate, toDate))
                 .where(verifySearchKeywords(title, contents, assigneeEmail))
@@ -78,7 +75,7 @@ public class CardQueryDslRepositoryImpl implements CardQueryDslRepository {
                 .leftJoin(card.listEntity, listEntity)
                 .leftJoin(listEntity.board, board)
                 .leftJoin(card.managers, manager)
-                .leftJoin(manager.workSpaceMember)
+                .leftJoin(manager.workspaceMember)
                 .leftJoin(workspaceMember.user, user)
                 .where(orIfPresentForDateRange(fromDate, toDate))
                 .where(verifySearchKeywords(title, contents, assigneeEmail))
