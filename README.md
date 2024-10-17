@@ -34,6 +34,9 @@
 
 
 ## 와이어 프레임
+![스크린샷 2024-10-18 오전 5 09 24](https://github.com/user-attachments/assets/ec7010c9-149d-459e-a592-cee1ccef2b2d)
+![스크린샷 2024-10-18 오전 5 09 45](https://github.com/user-attachments/assets/60a54e35-8a0e-4afa-a6a8-62a73c203c21)
+
 
 
 
