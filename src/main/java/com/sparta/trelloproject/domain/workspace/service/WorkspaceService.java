@@ -9,9 +9,6 @@ import com.sparta.trelloproject.domain.workspace.entity.Workspace;
 import com.sparta.trelloproject.domain.workspace.exception.UserNotFoundException;
 import com.sparta.trelloproject.domain.workspace.exception.WorkspaceNotFoundException;
 import com.sparta.trelloproject.domain.workspace.repository.WorkspaceRepository;
-import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberInviteRequest;
-import com.sparta.trelloproject.domain.workspacemember.dto.response.MemberResponse;
-import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
