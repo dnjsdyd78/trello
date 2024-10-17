@@ -96,16 +96,16 @@ public class WorkspaceService {
         workspaceRepository.save(workspace);
         return new WorkspaceResponse(workspace);
     }
-    public void deleteWorkspace(Long workspaceId){
-        Workspace workspace = workspaceRepository.findById(workspaceId).orElseThrow(() -> new WorkspaceNotFoundException(workspaceId));
+    public void deleteWorkspace(Long workspaceId) {
+        Workspace workspace = workspaceRepository.findById(workspaceId)
+                .orElseThrow(() -> new WorkspaceNotFoundException(workspaceId));
 
-        // 현재 사용자의 이메일로 권한 확인
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(email));
 
-        // 사용자가 ADMIN인지 확인
-        WorkspaceMember workspaceMember = workspaceMemberRepository.findByWorkspaceAndUser(workspace, user)
+        // 수정된 findFirstByWorkspaceAndUser 메서드를 사용하여 첫 번째 WorkspaceMember를 가져옴
+        WorkspaceMember workspaceMember = workspaceMemberRepository.findFirstByWorkspaceAndUser(workspace, user)
                 .orElseThrow(() -> new AccessDeniedException("워크스페이스에 접근할 권한이 없습니다."));
 
         if (workspaceMember.getRole() != ADMIN) {

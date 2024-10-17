@@ -9,8 +9,4 @@ public class BoardUpdateRequest {
     private String title;
 
     private String backgroundColor;  // background로 변경 가능
-
-    public Object getDescription() {
-        return null;
-    }
 }

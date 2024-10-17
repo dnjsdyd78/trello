@@ -17,6 +17,9 @@ public class MemberResponse {
     }
 
     public MemberResponse(WorkspaceMember workspaceMember) {
+        this.memberId = workspaceMember.getId();
+        this.email = workspaceMember.getUser().getEmail(); // User에서 email 가져옴
+        this.role = workspaceMember.getRole().name(); // UserRole이나 ZRole의 name()으로 설정
     }
 
     // Getter methods
