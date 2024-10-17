@@ -7,10 +7,7 @@ import com.sparta.trelloproject.domain.list.entity.ListEntity;
 import com.sparta.trelloproject.domain.manager.entity.Manager;
 import com.sparta.trelloproject.domain.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;

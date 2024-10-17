@@ -17,6 +17,7 @@ public enum ErrorStatus implements StatusBase {
     // 지민
 
     // 원용
+    _API_FAILED(HttpStatus.BAD_REQUEST, "400", "API 요청이 실패하였습니다."),
     _SERIALIZATION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "500", "변환에 실패하였습니다."),
     _INCORRECT_DATE_RANGE(HttpStatus.BAD_REQUEST, "400", "날짜 범위 설정이 잘못되었습니다."),
     _NOT_FOUND_TOPIC(HttpStatus.NOT_FOUND, "404", "토픽이 존재하지 않거나 정상적이지 않습니다."),
