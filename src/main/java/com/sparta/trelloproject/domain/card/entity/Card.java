@@ -24,6 +24,7 @@ import java.util.List;
 public class Card extends Timestamped {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "card_id")
     private Long cardId;
 
     @Column(nullable = false)
