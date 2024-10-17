@@ -24,7 +24,8 @@ import java.util.stream.Collectors;
 public class Card extends Timestamped {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cardId;
+    @Column(name = "card_id")
+    private Long id;
 
     @Column(nullable = false)
     private String title;
