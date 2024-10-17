@@ -1,5 +1,6 @@
 package com.sparta.trelloproject.domain.workspacemember.controller;
 
+import com.sparta.trelloproject.common.annotation.SendAlert;
 import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberInviteRequest;
 import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberRoleUpdateRequest;
 import com.sparta.trelloproject.domain.workspacemember.dto.response.MemberResponse;
@@ -22,6 +23,7 @@ public class WorkspaceMemberController {
     }
 
     // 멤버 초대
+    @SendAlert
     @PostMapping
     public ResponseEntity<MemberResponse> inviteMember(@PathVariable Long workspaceId,
                                                        @RequestBody @Valid MemberInviteRequest request) {

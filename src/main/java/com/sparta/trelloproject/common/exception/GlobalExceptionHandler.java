@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import org.springframework.security.access.AccessDeniedException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -34,9 +33,9 @@ public class GlobalExceptionHandler {
     }
 
 
-    //WorkspaceController에서 권한 오류 발생 시
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException ex) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
-    }
+//    //WorkspaceController에서 권한 오류 발생 시
+//    @ExceptionHandler(AccessDeniedException.class)
+//    public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException ex) {
+//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
+//    }
 }
