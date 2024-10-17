@@ -52,15 +52,14 @@ public class CardQueryDslRepositoryImpl implements CardQueryDslRepository {
         List<SearchResponse> results = queryFactory
                 .select(
                         new QSearchResponse(
-                                card.listEntity.board.id,
+                                board.id,
                                 card.id,
                                 card.title,
                                 card.content,
-                                card.deadLine,
-                                card.comments,
-                                GroupBy.list(manager.email)
+                                card.deadLine
                         )
                 )
+
                 .from(card)
                 .leftJoin(card.listEntity, listEntity)
                 .leftJoin(listEntity.board, board)
@@ -70,7 +69,7 @@ public class CardQueryDslRepositoryImpl implements CardQueryDslRepository {
                 .where(board.id.eq(boardId))
                 .orderBy(card.deadLine.asc())
                 .offset(pageable.getOffset())
-                .offset(pageable.getPageSize())
+                .limit(pageable.getPageSize())
                 .fetch();
 
         // 총 데이터 카운트
@@ -99,10 +98,10 @@ public class CardQueryDslRepositoryImpl implements CardQueryDslRepository {
             builder.or(card.title.contains(title));
         }
         if (contents != null && !contents.isBlank()) {
-            builder.or(card.content.contains(contents));
+            builder.or(card.content.like("%" + contents + "%"));
         }
         if (assigneeEmail != null && !assigneeEmail.isBlank()) {
-            builder.or(workspaceMember.user.email.eq(assigneeEmail));
+            builder.or(manager.email.eq(assigneeEmail));
         }
 
         return builder;

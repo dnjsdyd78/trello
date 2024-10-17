@@ -1,8 +1,9 @@
 package com.sparta.trelloproject.domain.comment.dto.response;
 
 import com.sparta.trelloproject.domain.user.dto.UserDto;
+import lombok.Data;
 import lombok.Getter;
-
+@Data
 @Getter
 public class CommentSaveResponseDto {
 

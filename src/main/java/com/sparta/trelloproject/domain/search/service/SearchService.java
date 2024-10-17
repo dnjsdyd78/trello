@@ -37,7 +37,7 @@ public class SearchService {
         Page<SearchResponse> result = cardRepository.searchCardByBoardAndTitleWithContentsAndAssigneeWithinDeadlineRange
                 (pageable,boardId,titleKeyword,bodyKeyword,assigneeEmail,fromDate,toDate);
 
-        return ApiResponse.onSuccess(result);
+        return ApiResponse.onSuccess((result));
     }
 
     // 문자열 공백이면 null 값 반환
