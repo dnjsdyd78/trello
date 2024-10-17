@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Getter
-public class AuthUser {
+public class AuthUser  {
 
     private final Long id;
     private final String email;

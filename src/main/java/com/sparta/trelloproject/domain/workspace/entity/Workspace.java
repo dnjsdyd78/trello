@@ -1,6 +1,7 @@
 package com.sparta.trelloproject.domain.workspace.entity;
 
 import com.sparta.trelloproject.domain.user.entity.User;
+import com.sparta.trelloproject.domain.user.enums.UserRole;
 import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import jakarta.persistence.*;
 
@@ -40,13 +41,15 @@ public class Workspace {
     public Workspace() {}
 
     // 멤버 추가 메서드 (User와 Role을 함께 받음)
-    public void addMember(User user, WorkspaceMember.Role role) {
+    public void addMember(User user, UserRole role) {
         WorkspaceMember workspaceMember = new WorkspaceMember(this, user, role);  // WorkspaceMember 생성
         members.add(workspaceMember);  // 멤버 목록에 추가
         workspaceMember.setWorkspace(this);  // workspace 설정
     }
 
     public void update(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public void addMember(WorkspaceMember workspaceMember) {
