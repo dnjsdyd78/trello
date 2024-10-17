@@ -17,7 +17,6 @@ public class ManagerController {
 
     @PostMapping("/cards/{cardId}/managers")
     public ApiResponse<ManagerResponse> saveManager(
-            @AuthenticationPrincipal AuthUser authUser,
             @PathVariable Long cardId,
             @RequestBody ManagerRequest request) {
         ManagerResponse response = managerService.saveManager(cardId, request);
@@ -26,7 +25,6 @@ public class ManagerController {
 
     @DeleteMapping("/managers/{managerId}")
     public ApiResponse<String> deleteManager(
-            @AuthenticationPrincipal AuthUser authUser,
             @PathVariable Long managerId) {
         managerService.deleteManager(managerId);
         return ApiResponse.onSuccess("매니저가 삭제되었습니다.");
