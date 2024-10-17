@@ -1,15 +1,13 @@
 package com.sparta.trelloproject.domain.card.service;
 
 import com.sparta.trelloproject.common.apipayload.status.ErrorStatus;
-import com.sparta.trelloproject.common.dto.AuthUser;
 import com.sparta.trelloproject.common.exception.ApiException;
-import com.sparta.trelloproject.common.exception.InvalidRequestException;
+import com.sparta.trelloproject.domain.card.dto.request.CardDeleteRequest;
 import com.sparta.trelloproject.domain.card.dto.request.CardSaveRequest;
 import com.sparta.trelloproject.domain.card.dto.request.CardUpdateRequest;
 import com.sparta.trelloproject.domain.card.dto.response.CardDetailResponse;
 import com.sparta.trelloproject.domain.card.dto.response.CardSaveResponse;
 import com.sparta.trelloproject.domain.card.entity.Card;
-import com.sparta.trelloproject.domain.card.repository.CardQueryDslRepository;
 import com.sparta.trelloproject.domain.card.repository.CardRepository;
 import com.sparta.trelloproject.domain.comment.dto.response.CommentResponse;
 import com.sparta.trelloproject.domain.comment.entity.Comment;
@@ -17,7 +15,8 @@ import com.sparta.trelloproject.domain.list.entity.ListEntity;
 import com.sparta.trelloproject.domain.list.repository.ListRepository;
 import com.sparta.trelloproject.domain.manager.dto.response.ManagerResponse;
 import com.sparta.trelloproject.domain.manager.entity.Manager;
-import com.sparta.trelloproject.domain.user.entity.User;
+import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
+import com.sparta.trelloproject.domain.workspacemember.repository.WorkspaceMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +31,17 @@ public class CardService {
 
     private final CardRepository cardRepository;
     private final ListRepository listRepository;
+    private final WorkspaceMemberRepository workspaceMemberRepository;
 
     @Transactional
     public CardSaveResponse saveCard(Long listId, CardSaveRequest cardSaveRequest) {
+        // 현재 사용자에 대한 WorkspaceMember 찾기
+        WorkspaceMember member = workspaceMemberRepository.findByUserId(cardSaveRequest.getUserId())
+                .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
+
+        // 권한 검사
+        checkPermission(member);
+
         ListEntity listEntity = findListById(listId);
 
         // Card 객체 생성
@@ -62,6 +69,13 @@ public class CardService {
 
     @Transactional
     public CardSaveResponse updateCard(Long cardId, CardUpdateRequest request) {
+        // 현재 사용자에 대한 WorkspaceMember 찾기
+        WorkspaceMember member = workspaceMemberRepository.findByUserId(request.getUserId())
+                .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
+
+        // 권한 검사
+        checkPermission(member);
+
         // 기존 카드 찾기
         Card existingCard = findCardById(cardId);
 
@@ -86,8 +100,8 @@ public class CardService {
     }
 
     @Transactional
-    public void deleteCard(Long cardId) {
-        cardRepository.deleteById(cardId);
+    public void deleteCard(CardDeleteRequest request) {
+        cardRepository.deleteById(request.getCardId());
     }
 
     private Card findCardById(Long cardId) {
@@ -98,6 +112,13 @@ public class CardService {
     private ListEntity findListById(Long listId) {
         return listRepository.findById(listId)
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_ListEntity));
+    }
+
+    // 권한 체크 메서드
+    public void checkPermission(WorkspaceMember member) {
+        if (member.getRole() == WorkspaceMember.Role.READ_ONLY) {
+            throw new ApiException(ErrorStatus._FORBIDDEN);
+        }
     }
 
     // 댓글과 매니저 리스트를 DTO로 변환하는 메서드

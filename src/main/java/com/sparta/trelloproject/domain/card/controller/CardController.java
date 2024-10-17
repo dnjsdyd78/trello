@@ -1,6 +1,7 @@
 package com.sparta.trelloproject.domain.card.controller;
 
 import com.sparta.trelloproject.common.apipayload.ApiResponse;
+import com.sparta.trelloproject.domain.card.dto.request.CardDeleteRequest;
 import com.sparta.trelloproject.domain.card.dto.request.CardSaveRequest;
 import com.sparta.trelloproject.domain.card.dto.request.CardUpdateRequest;
 import com.sparta.trelloproject.domain.card.dto.response.CardDetailResponse;
@@ -37,9 +38,9 @@ public class CardController {
     }
 
     // 카드 삭제
-    @DeleteMapping("/cards/{cardId}")
-    public ApiResponse<String> deleteCard(@PathVariable Long cardId) {
-        cardService.deleteCard(cardId);
+    @DeleteMapping("/cards")
+    public ApiResponse<String> deleteCard(@RequestBody CardDeleteRequest request) {
+        cardService.deleteCard(request);
         return ApiResponse.onSuccess("카드가 삭제되었습니다.");
     }
 }

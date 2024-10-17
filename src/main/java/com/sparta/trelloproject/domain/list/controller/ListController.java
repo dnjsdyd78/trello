@@ -2,6 +2,7 @@ package com.sparta.trelloproject.domain.list.controller;
 
 import com.sparta.trelloproject.common.apipayload.ApiResponse;
 import com.sparta.trelloproject.common.dto.AuthUser;
+import com.sparta.trelloproject.domain.list.dto.request.ListDeleteRequest;
 import com.sparta.trelloproject.domain.list.dto.request.ListSequenceUpdateRequest;
 import com.sparta.trelloproject.domain.list.dto.request.ListSaveRequest;
 import com.sparta.trelloproject.domain.list.dto.request.ListUpdateRequest;
@@ -37,9 +38,9 @@ public class ListController {
 //        return ApiResponse.onSuccess(listService.updateSequenceList(listId, request));
 //    }
 
-    @DeleteMapping("/lists/{listId}")
-    public ApiResponse<String> deleteList(@PathVariable Long listId) {
-        listService.deleteList(listId);
+    @DeleteMapping("/lists")
+    public ApiResponse<String> deleteList(@RequestBody ListDeleteRequest request) {
+        listService.deleteList(request);
         return ApiResponse.onSuccess("리스트가 정상적으로 삭제되었습니다.");
     }
 }
