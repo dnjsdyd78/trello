@@ -7,10 +7,5 @@ import lombok.Getter;
 public class BoardUpdateRequest {
     @NotBlank(message = "Board 제목은 필수입니다.")
     private String title;
-
     private String backgroundColor;  // background로 변경 가능
-
-    public Object getDescription() {
-        return null;
-    }
 }

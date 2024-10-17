@@ -58,7 +58,7 @@ public class BoardService {
                 .orElseThrow(() -> new WorkspaceNotFoundException(workspaceId));
         Board board = boardRepository.findByIdAndWorkspace(boardId, workspace)
                 .orElseThrow(() -> new BoardNotFoundException(boardId));
-        board.update(request.getTitle(), request.getDescription());
+        board.update(request.getTitle(), request.getBackgroundColor());
         boardRepository.save(board);
         return new BoardResponse(board);
     }

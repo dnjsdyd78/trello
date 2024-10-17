@@ -42,7 +42,7 @@ public class CardService {
         // 권한 검사
         checkPermission(member);
 
-        ListEntity listEntity = findListById(listId);
+        ListEntity listEntity = findListByIdWithLock(listId);
 
         // Card 객체 생성
         Card newCard = Card.from(cardSaveRequest, listEntity);
@@ -77,7 +77,7 @@ public class CardService {
         checkPermission(member);
 
         // 기존 카드 찾기
-        Card existingCard = findCardById(cardId);
+        Card existingCard = findCardByIdWithLock(cardId);
 
         // 변경 감지 방식으로 필드를 업데이트
         if (request.getTitle() != null) {
@@ -109,9 +109,19 @@ public class CardService {
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_CARD));
     }
 
+    private Card findCardByIdWithLock(Long cardId) {
+        return cardRepository.findByIdWithReadLock(cardId)
+                .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_CARD));
+    }
+
     private ListEntity findListById(Long listId) {
         return listRepository.findById(listId)
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_ListEntity));
+    }
+
+    private ListEntity findListByIdWithLock(Long listId){
+        return listRepository.findByIdWithPessimisticLock(listId)
+                .orElseThrow(()-> new ApiException(ErrorStatus._NOT_FOUND_ListEntity));
     }
 
     // 권한 체크 메서드

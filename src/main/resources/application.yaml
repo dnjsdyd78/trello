@@ -2,6 +2,13 @@ spring:
   application:
     name: trello-project
 
+  spring:
+    http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        force: true
+
   datasource:
 
     url: jdbc:mysql://localhost:3306/${DB_NAME}

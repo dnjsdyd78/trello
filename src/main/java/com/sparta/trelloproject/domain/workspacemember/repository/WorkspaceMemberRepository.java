@@ -16,4 +16,6 @@ public interface WorkspaceMemberRepository extends JpaRepository<WorkspaceMember
 
 
     Optional<WorkspaceMember> findByUserId(Long userId);
+
+
 }
