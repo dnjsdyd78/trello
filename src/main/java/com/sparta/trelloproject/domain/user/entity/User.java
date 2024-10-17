@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.rmi.ServerException;
 
 @Entity
 @Getter
@@ -38,9 +41,15 @@ public class User {
         this.role = role;
     }
 
-    // 유저 권한 enum
-    public enum Role {
-        USER, // 일반 유저
-        ADMIN // 관리자 (워크스페이스 생성 가능, 다른 유저를 워크스페이스 관리자로 설정)
+    public static User fromAuthUser(AuthUser authUser) {
+        UserRole role = UserRole.of(
+                authUser.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .findFirst()
+//                        .orElseThrow(() -> new ServerException("권한이 없습니다."))
+                        .orElseThrow(() -> new IllegalArgumentException("권한이 없습니다."))
+        );
+//        return new User(authUser.getId(), authUser.getEmail(), role);
+        return null;
     }
 }

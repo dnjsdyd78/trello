@@ -12,17 +12,20 @@ public enum ErrorStatus implements StatusBase {
 
     // 예시
     _NOT_FOUND_CARD(HttpStatus.NOT_FOUND, "404", "존재하지 않는 카드입니다."),
-    _FORBIDDEN(HttpStatus.FORBIDDEN, "403", "접근 권한이 없습니다.");
+    _FORBIDDEN(HttpStatus.FORBIDDEN, "403", "접근 권한이 없습니다."),
 
     // 지민
 
     // 원용
-
+    _SERIALIZATION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "500", "텍스트 변환에 실패하였습니다."),
+    _INCORRECT_DATE_RANGE(HttpStatus.BAD_REQUEST, "400", "날짜 범위 설정이 잘못되었습니다."),
     // 가연
-
+    _NOT_FOUND_ListEntity(HttpStatus.NOT_FOUND, "404", "존재하지 않는 리스트입니다."),
+    _NOT_FOUND_WORKSPACE_MEMBER(HttpStatus.NOT_FOUND, "404", "존재하지 않는 멤버입니다."),
     // 예지
 
     // 예환
+    _NOT_FOUND_BOARD(HttpStatus.NOT_FOUND, "404", "존재하지 않는 보드입니다");
 
     private final HttpStatus httpStatus;
     private final String statusCode;
