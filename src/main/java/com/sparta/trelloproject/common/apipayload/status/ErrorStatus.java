@@ -24,7 +24,8 @@ public enum ErrorStatus implements StatusBase {
     _NOT_FOUND_ListEntity(HttpStatus.NOT_FOUND, "404", "존재하지 않는 리스트입니다."),
     _NOT_FOUND_WORKSPACE_MEMBER(HttpStatus.NOT_FOUND, "404", "존재하지 않는 멤버입니다."),
     // 예지
-
+    _INVALID_FILE_SIZE(HttpStatus.BAD_REQUEST, "400", "파일 크기가 5MB를 초과합니다."),
+    _INVALID_FILE_TYPE(HttpStatus.BAD_REQUEST, "400", "지원되지 않는 파일 형식입니다."),
     // 예환
     _NOT_FOUND_BOARD(HttpStatus.NOT_FOUND, "404", "존재하지 않는 보드입니다");
 
