@@ -49,7 +49,7 @@ public class SlackAlertUtil implements MessageListener {
                 throw new ApiException(ErrorStatus._NOT_FOUND_TOPIC);
             }
         } catch (Exception e) {
-            throw new ApiException(ErrorStatus._NOT_FOUND_TOPIC);
+            throw new ApiException(ErrorStatus._API_FAILED);
         }
 
     }
