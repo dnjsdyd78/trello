@@ -16,7 +16,7 @@ public class ManagerResponse {
     public ManagerResponse(Manager manager) {
         this.managerId = manager.getManagerId();
         this.cardId = manager.getCard().getCardId(); // 카드 ID 가져오기
-        this.workspaceMemberId = manager.getWorkSpaceMember().getWorkSpaceMemberId(); // 워크스페이스 멤버 ID 가져오기
+        this.workspaceMemberId = manager.getWorkspaceMember().getWorkspaceMemberId(); // 워크스페이스 멤버 ID 가져오기
         this.email = manager.getEmail(); // 이메일
     }
 }

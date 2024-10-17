@@ -10,8 +10,8 @@ import com.sparta.trelloproject.domain.manager.dto.response.ManagerResponse;
 import com.sparta.trelloproject.domain.manager.entity.Manager;
 import com.sparta.trelloproject.domain.manager.repository.ManagerRepository;
 import com.sparta.trelloproject.domain.user.entity.User;
-import com.sparta.trelloproject.domain.workSpaceMameber.entity.WorkSpaceMember;
-import com.sparta.trelloproject.domain.workSpaceMameber.repository.WorkSpaceMemberRepository;
+import com.sparta.trelloproject.domain.workSpaceMameber.entity.WorkspaceMember;
+import com.sparta.trelloproject.domain.workSpaceMameber.repository.WorkspaceMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ public class ManagerService {
 
     private final ManagerRepository managerRepository;
     private final CardRepository cardRepository;
-    private final WorkSpaceMemberRepository workSpaceMemberRepository;
+    private final WorkspaceMemberRepository workSpaceMemberRepository;
 
     // 매니저 생성
     @Transactional
@@ -31,12 +31,12 @@ public class ManagerService {
         User user = User.fromAuthUser(authUser);
 
         Card card = findCardById(cardId);
-        WorkSpaceMember workSpaceMember = findWorkSpaceMemberById(request.getWorkSpaceMemberId()); // workSpaceMemberId 추가);
+        WorkspaceMember workspaceMember = findWorkspaceMemberById(request.getWorkSpaceMemberId()); // workSpaceMemberId 추가);
 
         Manager manager = Manager.builder()
                 .card(card)
-                .workSpaceMember(workSpaceMember)
-                .email(workSpaceMember.getUser().getEmail())
+                .workSpaceMember(workspaceMember)
+                .email(workspaceMember.getUser().getEmail())
                 .build();
 
         managerRepository.save(manager);
@@ -57,7 +57,7 @@ public class ManagerService {
     }
 
     // 특정 워크스페이스 멤버 찾기
-    private WorkSpaceMember findWorkSpaceMemberById(Long workspaceMemberId) {
+    private WorkspaceMember findWorkspaceMemberById(Long workspaceMemberId) {
         return workSpaceMemberRepository.findById(workspaceMemberId)
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
     }

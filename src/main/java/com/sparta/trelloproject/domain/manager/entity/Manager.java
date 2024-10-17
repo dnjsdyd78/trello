@@ -1,7 +1,7 @@
 package com.sparta.trelloproject.domain.manager.entity;
 
 import com.sparta.trelloproject.domain.card.entity.Card;
-import com.sparta.trelloproject.domain.workSpaceMameber.entity.WorkSpaceMember;
+import com.sparta.trelloproject.domain.workSpaceMameber.entity.WorkspaceMember;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -23,16 +23,16 @@ public class Manager {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workspace_member_id")
-    private WorkSpaceMember workSpaceMember;
+    private WorkspaceMember workspaceMember;
 
     @Column(nullable = false)
     private String email; // 이메일 필드 추가
 
     // 매니저 생성자
     @Builder
-    public Manager(Card card, WorkSpaceMember workSpaceMember, String email) {
+    public Manager(Card card, WorkspaceMember workSpaceMember, String email) {
         this.card = card;
-        this.workSpaceMember = workSpaceMember;
+        this.workspaceMember = workSpaceMember;
         this.email = email;
     }
 }

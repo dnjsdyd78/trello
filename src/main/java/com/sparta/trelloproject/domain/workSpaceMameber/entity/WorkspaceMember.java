@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table
-public class WorkSpaceMember {
+public class WorkspaceMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long workSpaceMemberId;
+    private Long workspaceMemberId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
