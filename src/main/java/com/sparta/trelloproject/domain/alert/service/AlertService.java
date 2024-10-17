@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
 @RequiredArgsConstructor
 @Service
 public class AlertService {
@@ -22,8 +25,13 @@ public class AlertService {
         try {
             // 알림요청 제이슨 형태 문자열 변환
             String text = objectMapper.writeValueAsString(request);
-            // 레디스 데이터 전송
-            redisTemplate.convertAndSend("reservationChannel", text);
+
+            // 시간 데이터 Unix time 으로 변환
+            LocalDateTime localDateTime = request.getAlertTime();
+            long alertTime = localDateTime.toEpochSecond(ZoneOffset.UTC);
+
+            // 레디스에 예약 메시지 저장
+            redisTemplate.opsForZSet().add("scheduledMessages", text, alertTime);
 
             return new AlertResponse(request.getTitle(), request.getContents(), request.getAssignee(), request.getAlertTime());
         } catch (Exception e) {
