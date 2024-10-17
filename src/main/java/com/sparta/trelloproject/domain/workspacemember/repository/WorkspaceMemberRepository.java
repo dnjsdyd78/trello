@@ -16,4 +16,6 @@ public interface WorkspaceMemberRepository extends JpaRepository<WorkspaceMember
 
 
     Optional<WorkspaceMember> findByUserId(Long userId);
+    // userId와 workspaceId를 기반으로 WorkspaceMember 조회
+    Optional<WorkspaceMember> findByUserIdAndWorkspaceId(Long userId, Long workspaceId);
 }
