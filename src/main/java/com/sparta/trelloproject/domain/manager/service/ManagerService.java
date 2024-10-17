@@ -28,6 +28,13 @@ public class ManagerService {
     // 매니저 생성
     @Transactional
     public ManagerResponse saveManager(Long cardId, ManagerRequest request) {
+        // 현재 사용자에 대한 WorkspaceMember 찾기
+        WorkspaceMember member = workSpaceMemberRepository.findByUserId(request.getUserId())
+                .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
+
+        // 권한 검사
+        checkPermission(member);
+
         Card card = findCardById(cardId);
         WorkspaceMember workspaceMember = findWorkspaceMemberById(request.getWorkSpaceMemberId()); // workSpaceMemberId 추가
 
@@ -42,8 +49,14 @@ public class ManagerService {
     }
 
     @Transactional
-    public void deleteManager(Long managerId) {
-        managerRepository.deleteById(managerId);
+    public void deleteManager(ManagerRequest request) {
+        // 현재 사용자에 대한 WorkspaceMember 찾기
+        WorkspaceMember member = workSpaceMemberRepository.findByUserId(request.getUserId())
+                .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
+
+        // 권한 검사
+        checkPermission(member);
+        managerRepository.deleteById(request.getManagerId());
     }
 
 
@@ -57,5 +70,12 @@ public class ManagerService {
     private WorkspaceMember findWorkspaceMemberById(Long workspaceMemberId) {
         return workSpaceMemberRepository.findById(workspaceMemberId)
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
+    }
+
+    // 권한 체크 메서드
+    public void checkPermission(WorkspaceMember member) {
+        if (member.getRole() == WorkspaceMember.Role.READ_ONLY) {
+            throw new ApiException(ErrorStatus._FORBIDDEN);
+        }
     }
 }
