@@ -22,6 +22,7 @@ public enum ErrorStatus implements StatusBase {
     // 가연
     _NOT_FOUND_ListEntity(HttpStatus.NOT_FOUND, "404", "존재하지 않는 리스트입니다."),
     _NOT_FOUND_WORKSPACE_MEMBER(HttpStatus.NOT_FOUND, "404", "존재하지 않는 멤버입니다."),
+    _NOT_FOUND_MANAGER(HttpStatus.NOT_FOUND, "404", "존재하지 않는 매니저입니다."),
     // 예지
 
     // 예환

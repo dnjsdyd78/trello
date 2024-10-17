@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 public class CommentResponse {
-    private Long id;
-    private String comment;
+    private final Long id;
+    private final String comment;
 
     // Comment 매개변수를 받는 생성자
     public CommentResponse(Comment comment) {

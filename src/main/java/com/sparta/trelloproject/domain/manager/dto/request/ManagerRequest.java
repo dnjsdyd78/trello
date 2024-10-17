@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ManagerSaveRequest {
-    private Long cardId;  // 카드 ID
-    private Long workSpaceMemberId;  // 워크스페이스 멤버 ID
+public class ManagerRequest {
+    private Long workSpaceMemberId; // workSpaceMemberId 추가
 }
