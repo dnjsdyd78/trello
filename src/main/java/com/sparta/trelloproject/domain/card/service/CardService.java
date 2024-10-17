@@ -35,18 +35,18 @@ public class CardService {
 
     @Transactional
     public CardSaveResponse saveCard(AuthUser authUser, Long listId, CardSaveRequest cardSaveRequest) {
-        User user = User.fromAuthUser(authUser);
+        User user = User.fromAuthUser(authUser); // admin 인 경우만 카드 생성
 
         ListEntity listEntity = findListById(listId);
 
         // Card 객체 생성
-        Card newCard = Card.from(cardSaveRequest, listEntity);
+        Card newCard = Card.from(cardSaveRequest, listEntity, user);
         // Card 객체를 저장
         cardRepository.save(newCard);
         return CardSaveResponse.of(newCard);
     }
 
-    // 카드 + 댓글 + 매니저 조회
+    // 카드 + 댓글 + 매니저 조회 (모든 유저 조획 가능)
     public CardDetailResponse getCard(Long cardId) {
         Card card = cardRepository.findByIdWithDetails(cardId)
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_CARD));
@@ -64,7 +64,7 @@ public class CardService {
 
     @Transactional
     public CardSaveResponse updateCard(AuthUser authUser, Long cardId, CardUpdateRequest request) {
-        User user = User.fromAuthUser(authUser);
+        User user = User.fromAuthUser(authUser); // admin1, admin2 의 경우 카드 수정 가능
 
         Card existingCard = findCardById(cardId);
 
@@ -74,6 +74,7 @@ public class CardService {
                 .content(request.getContent() != null ? request.getContent() : existingCard.getContent())
                 .deadLine(request.getDeadLine() != null ? request.getDeadLine() : existingCard.getDeadLine())
                 .listEntity(existingCard.getListEntity()) // list는 변경하지 않음
+                .user(user)
                 .build();
 
         // 리포지토리에 저장 (옵션: JPA가 자동으로 변경사항을 감지하므로 save 호출은 생략 가능)

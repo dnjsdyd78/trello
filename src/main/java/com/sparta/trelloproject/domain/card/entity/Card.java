@@ -5,6 +5,7 @@ import com.sparta.trelloproject.domain.card.dto.request.CardSaveRequest;
 import com.sparta.trelloproject.domain.comment.entity.Comment;
 import com.sparta.trelloproject.domain.list.entity.ListEntity;
 import com.sparta.trelloproject.domain.manager.entity.Manager;
+import com.sparta.trelloproject.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -35,6 +36,10 @@ public class Card extends Timestamped {
     private LocalDateTime deadLine;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "list_id", nullable = false)
     private ListEntity listEntity;
 
@@ -45,20 +50,22 @@ public class Card extends Timestamped {
     private List<Manager> managers;
 
     @Builder
-    public Card(String title, String content, LocalDateTime deadLine, ListEntity listEntity) {
+    public Card(String title, String content, LocalDateTime deadLine, ListEntity listEntity, User user) {
         this.title = title;
         this.content = content;
         this.deadLine = deadLine;
         this.listEntity = listEntity;
+        this.user = user;
     }
 
     // Factory method to create a Card from CardSaveRequest
-    public static Card from(CardSaveRequest cardSaveRequest, ListEntity listEntity) {
+    public static Card from(CardSaveRequest cardSaveRequest, ListEntity listEntity, User user) {
         return Card.builder()
                 .title(cardSaveRequest.getTitle())
                 .content(cardSaveRequest.getContent())
                 .deadLine(cardSaveRequest.getDeadLine())
                 .listEntity(listEntity)
+                .user(user)
                 .build();
     }
 }
