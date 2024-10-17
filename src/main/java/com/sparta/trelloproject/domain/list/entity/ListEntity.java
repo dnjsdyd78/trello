@@ -19,7 +19,7 @@ public class ListEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long listId;
+    private Long id;
 
     @Column(nullable = false)
     private String title;

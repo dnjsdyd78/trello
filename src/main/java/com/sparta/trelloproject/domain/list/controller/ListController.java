@@ -1,15 +1,13 @@
 package com.sparta.trelloproject.domain.list.controller;
 
 import com.sparta.trelloproject.common.apipayload.ApiResponse;
-import com.sparta.trelloproject.common.dto.AuthUser;
 import com.sparta.trelloproject.domain.list.dto.request.ListDeleteRequest;
-import com.sparta.trelloproject.domain.list.dto.request.ListSequenceUpdateRequest;
 import com.sparta.trelloproject.domain.list.dto.request.ListSaveRequest;
+import com.sparta.trelloproject.domain.list.dto.request.ListSequenceUpdateRequest;
 import com.sparta.trelloproject.domain.list.dto.request.ListUpdateRequest;
 import com.sparta.trelloproject.domain.list.dto.response.ListSaveResponse;
 import com.sparta.trelloproject.domain.list.service.ListService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,12 +29,12 @@ public class ListController {
         return ApiResponse.onSuccess(listService.updateList(listId, request));
     }
 
-//    // 리스트 순서 변경
-//    @PatchMapping("/api/lists/{listId}/sequence")
-//    public ApiResponse<ListSaveResponse> updateSequenceList(@PathVariable Long listId,
-//                                                    @RequestBody ListSequenceUpdateRequest request) {
-//        return ApiResponse.onSuccess(listService.updateSequenceList(listId, request));
-//    }
+    // 리스트 순서 변경
+    @PatchMapping("/lists/{listId}/sequence")
+    public ApiResponse<ListSaveResponse> updateSequenceList(@PathVariable Long listId,
+                                                    @RequestBody ListSequenceUpdateRequest request) {
+        return ApiResponse.onSuccess(listService.updateSequenceList(listId, request));
+    }
 
     @DeleteMapping("/lists")
     public ApiResponse<String> deleteList(@RequestBody ListDeleteRequest request) {
