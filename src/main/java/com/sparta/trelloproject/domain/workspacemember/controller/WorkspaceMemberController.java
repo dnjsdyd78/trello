@@ -45,7 +45,7 @@ public class WorkspaceMemberController {
         return ResponseEntity.ok(response);
     }
 
-    // 멤버 제거
+    // 멤버 삭제
     @DeleteMapping("/{memberId}")
     public ResponseEntity<Void> removeMember(@PathVariable Long workspaceId, @PathVariable Long memberId) {
         workspaceMemberService.removeMember(workspaceId, memberId);
