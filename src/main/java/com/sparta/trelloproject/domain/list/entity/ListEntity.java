@@ -33,6 +33,16 @@ public class ListEntity {
         this.sequence = sequence;
         this.board = board;
     }
+
+    // 타이틀 업데이트 메서드
+    public void updateTitle(String title) {
+        this.title = title;
+    }
+
+    // 시퀀스 업데이트 메서드
+    public void updateSequence(Integer sequence) {
+        this.sequence = sequence;
+    }
 }
 
 

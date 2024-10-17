@@ -25,9 +25,7 @@ public class ListService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public ListSaveResponse saveList(AuthUser authUser, Long boardId, ListSaveRequest listSaveRequest) {
-        User user = User.fromAuthUser(authUser);
-
+    public ListSaveResponse saveList(Long boardId, ListSaveRequest listSaveRequest) {
         Board board = findBoardById(boardId);
 
         // 빌더 패턴을 사용하여 ListEntity 객체 생성
@@ -37,36 +35,31 @@ public class ListService {
                 .board(board)
                 .build();
 
+        // 엔티티 저장 로직 추가
+        listRepository.save(newListEntity);
         return ListSaveResponse.of(newListEntity);
     }
 
     @Transactional
-    public ListSaveResponse updateList(AuthUser authUser, Long listId, ListUpdateRequest request) {
-        User user = User.fromAuthUser(authUser);
-
+    public ListSaveResponse updateList(Long listId, ListUpdateRequest request) {
         // 리스트 찾기
         ListEntity existingListEntity = findListById(listId);
 
         // 업데이트할 필드 설정
-        // request에서 받은 값으로 리스트의 필드를 업데이트
-        // Builder를 사용하여 업데이트할 새로운 ListEntity 객체 생성
-        ListEntity updatedListEntity = ListEntity.builder()
-                .title(request.getTitle() != null ? request.getTitle() : existingListEntity.getTitle())
-                .sequence(request.getSequence() != null ? request.getSequence() : existingListEntity.getSequence())
-                .board(existingListEntity.getBoard()) // board는 변경하지 않음
-                .build();
+        if (request.getTitle() != null) {
+            existingListEntity.updateTitle(request.getTitle());  // 타이틀 업데이트
+        }
 
-        // 리스트를 저장 (변경 사항이 있다면)
-        listRepository.save(updatedListEntity);
+        if (request.getSequence() != null) {
+            existingListEntity.updateSequence(request.getSequence());  // 시퀀스 업데이트
+        }
 
-        return ListSaveResponse.of(updatedListEntity);
+        // 기존 엔티티는 이미 영속성 컨텍스트에 포함되어 있으므로, 별도의 save 호출 필요 없음
+        return ListSaveResponse.of(existingListEntity);
     }
 
     @Transactional
-    public ListSaveResponse updateSequenceList(AuthUser authUser, Long listId, ListSequenceUpdateRequest request) {
-        // 사용자 정보 가져오기 (필요에 따라 사용)
-        User user = User.fromAuthUser(authUser);
-
+    public ListSaveResponse updateSequenceList(Long listId, ListSequenceUpdateRequest request) {
         // 리스트 찾기
         ListEntity existingListEntity = findListById(listId);
 
@@ -84,8 +77,7 @@ public class ListService {
     }
 
     @Transactional
-    public void deleteList(AuthUser authUser, Long listId) {
-        User user = User.fromAuthUser(authUser);
+    public void deleteList(Long listId) {
         listRepository.deleteById(listId);
     }
 

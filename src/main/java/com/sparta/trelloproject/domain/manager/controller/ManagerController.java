@@ -20,7 +20,7 @@ public class ManagerController {
             @AuthenticationPrincipal AuthUser authUser,
             @PathVariable Long cardId,
             @RequestBody ManagerRequest request) {
-        ManagerResponse response = managerService.saveManager(authUser, cardId, request);
+        ManagerResponse response = managerService.saveManager(cardId, request);
         return ApiResponse.onSuccess(response);
     }
 
@@ -28,7 +28,7 @@ public class ManagerController {
     public ApiResponse<String> deleteManager(
             @AuthenticationPrincipal AuthUser authUser,
             @PathVariable Long managerId) {
-        managerService.deleteManager(authUser, managerId);
+        managerService.deleteManager(managerId);
         return ApiResponse.onSuccess("매니저가 삭제되었습니다.");
     }
 

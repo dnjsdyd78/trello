@@ -34,13 +34,11 @@ public class CardService {
     private final ListRepository listRepository;
 
     @Transactional
-    public CardSaveResponse saveCard(AuthUser authUser, Long listId, CardSaveRequest cardSaveRequest) {
-        User user = User.fromAuthUser(authUser); // admin 인 경우만 카드 생성
-
+    public CardSaveResponse saveCard(Long listId, CardSaveRequest cardSaveRequest) {
         ListEntity listEntity = findListById(listId);
 
         // Card 객체 생성
-        Card newCard = Card.from(cardSaveRequest, listEntity, user);
+        Card newCard = Card.from(cardSaveRequest, listEntity);
         // Card 객체를 저장
         cardRepository.save(newCard);
         return CardSaveResponse.of(newCard);
@@ -63,30 +61,32 @@ public class CardService {
     }
 
     @Transactional
-    public CardSaveResponse updateCard(AuthUser authUser, Long cardId, CardUpdateRequest request) {
-        User user = User.fromAuthUser(authUser); // admin1, admin2 의 경우 카드 수정 가능
-
+    public CardSaveResponse updateCard(Long cardId, CardUpdateRequest request) {
+        // 기존 카드 찾기
         Card existingCard = findCardById(cardId);
 
-        // 업데이트할 필드 설정
-        Card updatedCard = Card.builder()
-                .title(request.getTitle() != null ? request.getTitle() : existingCard.getTitle())
-                .content(request.getContent() != null ? request.getContent() : existingCard.getContent())
-                .deadLine(request.getDeadLine() != null ? request.getDeadLine() : existingCard.getDeadLine())
-                .listEntity(existingCard.getListEntity()) // list는 변경하지 않음
-                .user(user)
-                .build();
+        // 변경 감지 방식으로 필드를 업데이트
+        if (request.getTitle() != null) {
+            existingCard.updateTitle(request.getTitle());
+        }
 
-        // 리포지토리에 저장 (옵션: JPA가 자동으로 변경사항을 감지하므로 save 호출은 생략 가능)
-        cardRepository.save(updatedCard);
+        if (request.getContent() != null) {
+            existingCard.updateContent(request.getContent());
+        }
+
+        if (request.getDeadLine() != null) {
+            existingCard.updateDeadLine(request.getDeadLine());
+        }
+
+        // 변경 감지가 일어나므로 save 호출은 필요 없음
+        // JPA는 트랜잭션이 종료될 때 변경된 엔티티를 자동으로 flush하여 업데이트함
 
         // 응답 생성
-        return CardSaveResponse.of(updatedCard);
+        return CardSaveResponse.of(existingCard);
     }
 
     @Transactional
-    public void deleteCard(AuthUser authUser, Long cardId) {
-        User user = User.fromAuthUser(authUser);
+    public void deleteCard(Long cardId) {
         cardRepository.deleteById(cardId);
     }
 

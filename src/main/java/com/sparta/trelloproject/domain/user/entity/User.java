@@ -41,16 +41,4 @@ public class User {
         this.password = password;
         this.role = role;
     }
-
-    public static User fromAuthUser(AuthUser authUser) {
-        UserRole role = UserRole.of(
-                authUser.getAuthorities().stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .findFirst()
-//                        .orElseThrow(() -> new ServerException("권한이 없습니다."))
-                        .orElseThrow(() -> new IllegalArgumentException("권한이 없습니다."))
-        );
-//        return new User(authUser.getId(), authUser.getEmail(), role);
-        return null;
-    }
 }

@@ -27,9 +27,7 @@ public class ManagerService {
 
     // 매니저 생성
     @Transactional
-    public ManagerResponse saveManager(AuthUser authUser, Long cardId, ManagerRequest request) {
-        User user = User.fromAuthUser(authUser);
-
+    public ManagerResponse saveManager(Long cardId, ManagerRequest request) {
         Card card = findCardById(cardId);
         WorkspaceMember workspaceMember = findWorkspaceMemberById(request.getWorkSpaceMemberId()); // workSpaceMemberId 추가
 
@@ -44,8 +42,7 @@ public class ManagerService {
     }
 
     @Transactional
-    public void deleteManager(AuthUser authUser, Long managerId) {
-        User user = User.fromAuthUser(authUser);
+    public void deleteManager(Long managerId) {
         managerRepository.deleteById(managerId);
     }
 
