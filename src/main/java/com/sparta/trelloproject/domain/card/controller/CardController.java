@@ -1,5 +1,6 @@
 package com.sparta.trelloproject.domain.card.controller;
 
+import com.sparta.trelloproject.common.annotation.SendAlert;
 import com.sparta.trelloproject.common.apipayload.ApiResponse;
 import com.sparta.trelloproject.domain.card.dto.request.CardDeleteRequest;
 import com.sparta.trelloproject.domain.card.dto.request.CardSaveRequest;
@@ -17,7 +18,9 @@ public class CardController {
 
     private final CardService cardService;
 
+
     // 카드 생성
+    @SendAlert
     @PostMapping("/lists/{listId}/cards")
     public ApiResponse<CardSaveResponse> saveCard(@PathVariable Long listId,
                                                   @RequestBody CardSaveRequest request) {

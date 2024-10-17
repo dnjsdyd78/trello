@@ -1,8 +1,9 @@
 package com.sparta.trelloproject.domain.workspacemember.dto.response;
 
 import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
+import lombok.Data;
 import lombok.Getter;
-
+@Data
 @Getter
 public class MemberResponse {
     private Long memberId;
