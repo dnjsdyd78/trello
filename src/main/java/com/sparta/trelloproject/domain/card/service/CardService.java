@@ -116,7 +116,7 @@ public class CardService {
 
     // 권한 체크 메서드
     public void checkPermission(WorkspaceMember member) {
-        if (member.getRole() == WorkspaceMember.Role.READ_ONLY) {
+        if (member.getZrole() == WorkspaceMember.ZRole.READ_ONLY) {
             throw new ApiException(ErrorStatus._FORBIDDEN);
         }
     }

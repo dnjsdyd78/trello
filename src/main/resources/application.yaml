@@ -3,6 +3,7 @@ spring:
     name: trello-project
 
   datasource:
+
     url: jdbc:mysql://localhost:3306/${DB_NAME}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}

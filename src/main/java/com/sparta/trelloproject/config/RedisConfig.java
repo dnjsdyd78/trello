@@ -39,7 +39,6 @@ public class RedisConfig {
 
         // 토픽 설정
         container.addMessageListener(listener, new ChannelTopic("liveChannel"));
-        container.addMessageListener(listener, new ChannelTopic("reservationChannel"));
         return container;
     }
 

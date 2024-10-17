@@ -1,7 +1,6 @@
 package com.sparta.trelloproject.domain.manager.service;
 
 import com.sparta.trelloproject.common.apipayload.status.ErrorStatus;
-import com.sparta.trelloproject.common.dto.AuthUser;
 import com.sparta.trelloproject.common.exception.ApiException;
 import com.sparta.trelloproject.domain.card.entity.Card;
 import com.sparta.trelloproject.domain.card.repository.CardRepository;
@@ -9,12 +8,12 @@ import com.sparta.trelloproject.domain.manager.dto.request.ManagerRequest;
 import com.sparta.trelloproject.domain.manager.dto.response.ManagerResponse;
 import com.sparta.trelloproject.domain.manager.entity.Manager;
 import com.sparta.trelloproject.domain.manager.repository.ManagerRepository;
-import com.sparta.trelloproject.domain.user.entity.User;
 import com.sparta.trelloproject.domain.workspacemember.entity.WorkspaceMember;
 import com.sparta.trelloproject.domain.workspacemember.repository.WorkspaceMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -74,7 +73,7 @@ public class ManagerService {
 
     // 권한 체크 메서드
     public void checkPermission(WorkspaceMember member) {
-        if (member.getRole() == WorkspaceMember.Role.READ_ONLY) {
+        if (member.getZrole() == WorkspaceMember.ZRole.READ_ONLY) {
             throw new ApiException(ErrorStatus._FORBIDDEN);
         }
     }

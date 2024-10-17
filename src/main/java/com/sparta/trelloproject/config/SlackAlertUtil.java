@@ -1,10 +1,15 @@
 package com.sparta.trelloproject.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.slack.api.Slack;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
 import com.slack.api.methods.SlackApiException;
+import com.sparta.trelloproject.common.apipayload.status.ErrorStatus;
+import com.sparta.trelloproject.common.exception.ApiException;
+import com.sparta.trelloproject.domain.alert.dto.AlertRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.connection.Message;
@@ -14,6 +19,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Component
 @Slf4j(topic = "알림 배포")
@@ -37,14 +44,12 @@ public class SlackAlertUtil implements MessageListener {
             if (topic.equals("liveChannel")) {
                 // 실시간 알림 처리
                 publishMessage(text);
-            } else if (topic.equals("reservationChannel")) {
-                // 예약된 메시지 처리
-                ChatScheduleMessage(message);
             } else {
                 // 토픽에러 관련 예외처리로직
+                throw new ApiException(ErrorStatus._NOT_FOUND_TOPIC);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ApiException(ErrorStatus._NOT_FOUND_TOPIC);
         }
 
     }
@@ -64,51 +69,7 @@ public class SlackAlertUtil implements MessageListener {
             log.info("failedMessageLog: {}", text);
         }
     }
-
-    private void ChatScheduleMessage(Message message) throws Exception {
-
-        //임시설정
-        String text = "temp";
-        LocalDateTime alertTime = null;
-
-        var config = new AppConfig();
-        config.setSingleTeamBotToken(System.getenv(TOKEN));
-        config.setSigningSecret(System.getenv(KEY));
-        var app = new App(config);
-
-        app.command("/schedule", (req, ctx) -> {
-            var logger = ctx.logger;
-            var scheduledTime = alertTime.atZone(ZoneId.of("Asia/Seoul"));
-            ;
-            try {
-                var payload = req.getPayload();
-                var result = ctx.client().chatScheduleMessage(r -> r
-                        .token(ctx.getBotToken())
-                        .channel(payload.getChannelId())
-                        // 메시지
-                        .text(text)
-                        // 예약시간
-                        .postAt((int) scheduledTime.toInstant().getEpochSecond())
-                );
-
-                log.info("result: {}", result);
-            } catch (IOException | SlackApiException e) {
-                log.error("error: {}", e.getMessage(), e);
-                log.info("failedRecords: {}", text);
-                log.info("reservationTime: {}", alertTime);
-            }
-            return ctx.ack();
-        });
-
-        var server = new SlackAppServer(app);
-        server.start();
-    }
-
-    public LocalDateTime extractReservationTime(LocalDateTime alertTime) {
-//        ObjectMapper mapper = new ObjectMapper();
-//        SlackMessage slackMessage = mapper.readValue(messageBody, SlackMessage.class);
-//        LocalDateTime alertTime = slackMessage.getAlertTime();
-        return null;
-    }
 }
+
+
 

@@ -39,7 +39,7 @@ public class ListService {
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
 
         // 권한 검사
-        checkPermission(member, member.getRole());
+        checkPermission(member, member.getZrole());
 
         Board board = findBoardById(boardId);
 
@@ -62,7 +62,7 @@ public class ListService {
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
 
         // 권한 검사
-        checkPermission(member, member.getRole());
+        checkPermission(member, member.getZrole());
 
         // 리스트 찾기
         ListEntity existingListEntity = findListById(listId);
@@ -105,7 +105,7 @@ public class ListService {
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
 
         // 권한 검사
-        checkPermission(member, member.getRole());
+        checkPermission(member, member.getZrole());
 
         // 리스트 삭제
         listRepository.deleteById(request.getListId());
@@ -123,8 +123,8 @@ public class ListService {
     }
 
     // 권한 체크 메서드
-    public void checkPermission(WorkspaceMember member, WorkspaceMember.Role requiredRole) {
-        if (member.getRole() == WorkspaceMember.Role.READ_ONLY) {
+    public void checkPermission(WorkspaceMember member, WorkspaceMember.ZRole requiredRole) {
+        if (member.getZrole() == WorkspaceMember.ZRole.READ_ONLY) {
             throw new ApiException(ErrorStatus._FORBIDDEN);
         }
     }
