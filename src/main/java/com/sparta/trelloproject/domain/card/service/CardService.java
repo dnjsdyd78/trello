@@ -35,19 +35,26 @@ public class CardService {
 
     @Transactional
     public CardSaveResponse saveCard(Long listId, CardSaveRequest cardSaveRequest) {
-        // 현재 사용자에 대한 WorkspaceMember 찾기
-        WorkspaceMember member = workspaceMemberRepository.findByUserId(cardSaveRequest.getUserId())
+        // 리스트 찾기
+        ListEntity listEntity = findListById(listId);
+
+        // 리스트의 보드를 통해 워크스페이스 ID 가져오기
+        Long workspaceId = listEntity.getBoard().getWorkspace().getId();
+
+        // 현재 사용자에 대한 WorkspaceMember 찾기 (userId와 workspaceId 기반)
+        WorkspaceMember member = workspaceMemberRepository.findByUserIdAndWorkspaceId(
+                        cardSaveRequest.getUserId(), workspaceId)
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
 
         // 권한 검사
         checkPermission(member);
 
-        ListEntity listEntity = findListById(listId);
-
         // Card 객체 생성
         Card newCard = Card.from(cardSaveRequest, listEntity);
+
         // Card 객체를 저장
         cardRepository.save(newCard);
+
         return CardSaveResponse.of(newCard);
     }
 
@@ -69,15 +76,19 @@ public class CardService {
 
     @Transactional
     public CardSaveResponse updateCard(Long cardId, CardUpdateRequest request) {
-        // 현재 사용자에 대한 WorkspaceMember 찾기
-        WorkspaceMember member = workspaceMemberRepository.findByUserId(request.getUserId())
+        // 기존 카드 찾기
+        Card existingCard = findCardById(cardId);
+
+        // 카드의 리스트를 통해 워크스페이스 ID 가져오기
+        Long workspaceId = existingCard.getListEntity().getBoard().getWorkspace().getId();
+
+        // 현재 사용자에 대한 WorkspaceMember 찾기 (userId와 workspaceId 기반)
+        WorkspaceMember member = workspaceMemberRepository.findByUserIdAndWorkspaceId(
+                        request.getUserId(), workspaceId)
                 .orElseThrow(() -> new ApiException(ErrorStatus._NOT_FOUND_WORKSPACE_MEMBER));
 
         // 권한 검사
         checkPermission(member);
-
-        // 기존 카드 찾기
-        Card existingCard = findCardById(cardId);
 
         // 변경 감지 방식으로 필드를 업데이트
         if (request.getTitle() != null) {
@@ -93,7 +104,6 @@ public class CardService {
         }
 
         // 변경 감지가 일어나므로 save 호출은 필요 없음
-        // JPA는 트랜잭션이 종료될 때 변경된 엔티티를 자동으로 flush하여 업데이트함
 
         // 응답 생성
         return CardSaveResponse.of(existingCard);
