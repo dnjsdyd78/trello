@@ -1,6 +1,7 @@
 package com.sparta.trelloproject.domain.workspacemember.controller;
 
 import com.sparta.trelloproject.common.annotation.SendAlert;
+import com.sparta.trelloproject.common.apipayload.ApiResponse;
 import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberInviteRequest;
 import com.sparta.trelloproject.domain.workspacemember.dto.request.MemberRoleUpdateRequest;
 import com.sparta.trelloproject.domain.workspacemember.dto.response.MemberResponse;
@@ -25,32 +26,32 @@ public class WorkspaceMemberController {
     // 멤버 초대
     @SendAlert
     @PostMapping
-    public ResponseEntity<MemberResponse> inviteMember(@PathVariable Long workspaceId,
+    public ApiResponse<MemberResponse> inviteMember(@PathVariable Long workspaceId,
                                                        @RequestBody @Valid MemberInviteRequest request) {
         MemberResponse response = workspaceMemberService.inviteMember(workspaceId, request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ApiResponse.onSuccess(response);
     }
 
     // 멤버 목록 조회
     @GetMapping
-    public ResponseEntity<List<MemberResponse>> getMembers(@PathVariable Long workspaceId) {
+    public ApiResponse<List<MemberResponse>> getMembers(@PathVariable Long workspaceId) {
         List<MemberResponse> members = workspaceMemberService.getMembers(workspaceId);
-        return ResponseEntity.ok(members);
+        return ApiResponse.onSuccess(members);
     }
 
     // 멤버 역할 수정
     @PutMapping("/{memberId}")
-    public ResponseEntity<MemberResponse> updateMemberRole(@PathVariable Long workspaceId,
+    public ApiResponse<MemberResponse> updateMemberRole(@PathVariable Long workspaceId,
                                                            @PathVariable Long memberId,
                                                            @RequestBody @Valid MemberRoleUpdateRequest request) {
         MemberResponse response = workspaceMemberService.updateMemberRole(workspaceId, memberId, request);
-        return ResponseEntity.ok(response);
+        return ApiResponse.onSuccess(response);
     }
 
     // 멤버 삭제
     @DeleteMapping("/{memberId}")
-    public ResponseEntity<Void> removeMember(@PathVariable Long workspaceId, @PathVariable Long memberId) {
+    public ApiResponse<String> removeMember(@PathVariable Long workspaceId, @PathVariable Long memberId) {
         workspaceMemberService.removeMember(workspaceId, memberId);
-        return ResponseEntity.noContent().build();
+        return ApiResponse.onSuccess("null");
     }
 }
