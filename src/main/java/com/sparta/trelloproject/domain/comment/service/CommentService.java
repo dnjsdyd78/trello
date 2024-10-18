@@ -23,14 +23,14 @@ public class CommentService {
     private final UserRepository userRepository;
 
     public CommentSaveResponseDto saveComment(Long cardId, CommentSaveRequestDto commentSaveRequestDto) {
-        if (userIsReadOnly(commentSaveRequestDto.getId())) {
+        if (userIsReadOnly(commentSaveRequestDto.getUser().getId())) {
             throw new RuntimeException(ErrorStatus._READ_ONLY_USER.getMessage());
         }
 
         Card card = cardRepository.findById(cardId).orElseThrow(() ->
                 new NullPointerException("카드를 찾을수 없습니다."));
 
-        User user = userRepository.findById(commentSaveRequestDto.getId()).orElseThrow(() ->
+        User user = userRepository.findById(commentSaveRequestDto.getUser().getId()).orElseThrow(() ->
                 new NullPointerException("사용자를 찾을수 없습니다."));
 
         Comment comment = new Comment(commentSaveRequestDto.getContents(), card, user);
