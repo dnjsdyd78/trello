@@ -1,5 +1,6 @@
 package com.sparta.trelloproject.domain.comment.controller;
 
+import com.sparta.trelloproject.common.annotation.SendAlert;
 import com.sparta.trelloproject.common.apipayload.ApiResponse;
 import com.sparta.trelloproject.domain.comment.dto.request.CommentSaveRequestDto;
 import com.sparta.trelloproject.domain.comment.dto.request.CommentUpdateRequestDto;
@@ -16,6 +17,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
+    @SendAlert
     @PostMapping("/cards/{cardId}/comments")
     public ApiResponse<CommentSaveResponseDto> saveComment(@PathVariable Long cardId, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
         return ApiResponse.onSuccess(commentService.saveComment(cardId, commentSaveRequestDto));

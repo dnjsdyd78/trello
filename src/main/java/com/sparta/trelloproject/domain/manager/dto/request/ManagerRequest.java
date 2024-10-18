@@ -9,4 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ManagerRequest {
     private Long workSpaceMemberId; // workSpaceMemberId 추가
+
+    private Long userId;
+    private Long managerId;
 }

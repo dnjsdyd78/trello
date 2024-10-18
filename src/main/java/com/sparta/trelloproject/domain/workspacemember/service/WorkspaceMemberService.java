@@ -1,6 +1,7 @@
 package com.sparta.trelloproject.domain.workspacemember.service;
 
 import com.sparta.trelloproject.domain.user.entity.User;
+import com.sparta.trelloproject.domain.user.enums.UserRole;
 import com.sparta.trelloproject.domain.user.repository.UserRepository;
 import com.sparta.trelloproject.domain.workspace.entity.Workspace;
 import com.sparta.trelloproject.domain.workspace.exception.UserNotFoundException;
@@ -37,23 +38,18 @@ public class WorkspaceMemberService {
         Workspace workspace = workspaceRepository.findById(workspaceId)
                 .orElseThrow(() -> new WorkspaceNotFoundException(workspaceId));
 
-        // 이메일로 User 조회 (User가 필요함)
+        // 이메일로 User 조회
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UserNotFoundException(request.getEmail()));
 
-        // String을 WorkspaceMember.Role로 변환
-        WorkspaceMember.Role role = WorkspaceMember.Role.valueOf(request.getRole().toUpperCase());
+        // UserRole이나 ZRole 중 하나를 사용
+        UserRole role = UserRole.valueOf(request.getRole().toUpperCase());
 
         // WorkspaceMember 객체 생성
         WorkspaceMember workspaceMember = new WorkspaceMember(workspace, user, role);
 
-        // Workspace에 멤버 추가
-        workspace.addMember(workspaceMember);
-
-        // 변경된 Workspace 저장
-        workspaceRepository.save(workspace);
-
-        // 새로운 멤버 추가 후 MemberResponse 반환
+        // 멤버 저장 및 추가
+        workspaceMemberRepository.save(workspaceMember);
         return new MemberResponse(workspaceMember);
     }
 

@@ -8,4 +8,6 @@ import lombok.RequiredArgsConstructor;
 public class ListUpdateRequest {
     private String title;
     private Integer sequence;
+
+    private Long userId;
 }

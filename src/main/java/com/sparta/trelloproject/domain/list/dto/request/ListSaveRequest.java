@@ -6,4 +6,6 @@ import lombok.Getter;
 public class ListSaveRequest {
     private String title;
     private int sequence;
+
+    private Long userId;
 }

@@ -1,11 +1,12 @@
 package com.sparta.trelloproject.domain.card.dto.response;
 
 import com.sparta.trelloproject.domain.card.entity.Card;
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
-
+@Data
 @Getter
 @RequiredArgsConstructor
 public class CardSaveResponse {

@@ -1,6 +1,5 @@
 package com.sparta.trelloproject.domain.alert.dto;
 
-import jakarta.validation.Valid;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
