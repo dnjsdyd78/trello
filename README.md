@@ -6,8 +6,8 @@
 | ![스크린샷 2024-10-18 오전 4 43 33](https://github.com/user-attachments/assets/8beb058a-eb50-4267-bc6c-b165b1807fd5) | ![스크린샷 2024-10-18 오전 4 43 12](https://github.com/user-attachments/assets/1c966822-ce50-4537-ae60-624e76b8ca86)
  | ![스크린샷 2024-10-18 오전 10 23 31](https://github.com/user-attachments/assets/54191531-efe9-4977-9788-13083edad61b)
  | ![스크린샷 2024-10-18 오전 4 51 16](https://github.com/user-attachments/assets/7ecdb9f7-6dad-4320-93a8-20e165148dc8)
- | ![스크린샷 2024-10-18 오전 4 42 26](https://github.com/user-attachments/assets/bf5485e9-7711-44d8-bd99-845c4a5e9f0d)
- | | :---: | :---: | :---: | :---: | :---: | 
+ | ![스크린샷 2024-10-18 오전 4 42 26](https://github.com/user-attachments/assets/bf5485e9-7711-44d8-bd99-845c4a5e9f0d) | 
+ | :---: | :---: | :---: | :---: | :---: | 
 | 박지민 | 정예지 | 안예환 | 이가연 | 최원용 |
 
 ## 프로젝트 기능
