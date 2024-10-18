@@ -5,12 +5,10 @@ import lombok.Getter;
 
 @Getter
 public class CommentSaveRequestDto {
-    private final Long id;
     private final String contents;
     private final UserDto user;
 
-    public CommentSaveRequestDto(Long id, String contents, UserDto user) {
-        this.id = id;
+    public CommentSaveRequestDto(String contents, UserDto user) {
         this.contents = contents;
         this.user = user;
     }
