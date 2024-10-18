@@ -3,13 +3,9 @@
 #####  Trello는 프로젝트 관리를 위한 협업 툴로, 직관적인 칸반 보드(Kanban Board) 방식으로 작업을 관리할 수 있어, 많은 기업에서 애용하는 도구입니다. 이번 프로젝트를 통해 Trello의 백엔드를 개발하며 실무에서 사용하는 여러 기술을 접하고 적용해보는 기회를 가질 것입니다.
 
 ## 팀원
-| ![스크린샷 2024-10-18 오전 4 43 33](https://github.com/user-attachments/assets/8beb058a-eb50-4267-bc6c-b165b1807fd5) | ![스크린샷 2024-10-18 오전 4 43 12](https://github.com/user-attachments/assets/1c966822-ce50-4537-ae60-624e76b8ca86) |
-| :---: | :---: |
-| 박지민 | 정예지 |
-| ![스크린샷 2024-10-18 오전 10 23 31](https://github.com/user-attachments/assets/54191531-efe9-4977-9788-13083edad61b) | ![스크린샷 2024-10-18 오전 4 51 16](https://github.com/user-attachments/assets/7ecdb9f7-6dad-4320-93a8-20e165148dc8) |
-| 안예환 | 이가연 |
-| ![스크린샷 2024-10-18 오전 4 42 26](https://github.com/user-attachments/assets/bf5485e9-7711-44d8-bd99-845c4a5e9f0d) |  |
-| 최원용 |  |
+| ![스크린샷 2024-10-18 오전 4 43 33](https://github.com/user-attachments/assets/8beb058a-eb50-4267-bc6c-b165b1807fd5) | ![스크린샷 2024-10-18 오전 4 43 12](https://github.com/user-attachments/assets/1c966822-ce50-4537-ae60-624e76b8ca86) | ![스크린샷 2024-10-18 오전 10 23 31](https://github.com/user-attachments/assets/54191531-efe9-4977-9788-13083edad61b) | ![스크린샷 2024-10-18 오전 4 51 16](https://github.com/user-attachments/assets/7ecdb9f7-6dad-4320-93a8-20e165148dc8) | ![스크린샷 2024-10-18 오전 4 42 26](https://github.com/user-attachments/assets/bf5485e9-7711-44d8-bd99-845c4a5e9f0d) |
+| :---: | :---: | :---: | :---: | :---: |
+| 박지민 | 정예지 | 안예환 | 이가연 | 최원용 |
 
 ## 프로젝트 기능
 
